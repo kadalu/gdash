@@ -48,6 +48,16 @@ def dashboard():
     return render_template("index.html")
 
 
+@app.route("/volumes")
+def volumes():
+    return render_template("index.html")
+
+
+@app.route("/volumes/<volid>")
+def volumesVolume(volid):
+    return render_template("index.html")
+
+
 @app.route("/data")
 def get_data():
     cached = app.cache.get('data')

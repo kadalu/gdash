@@ -1,7 +1,7 @@
 <div id="list" class="pure-u-1">
   <div class="list-content">
     {{#each model}}
-      {{#linkTo "volumes.volume" this}}
+      {{#link-to "volumes.volume" this}}
         {{#if volume_up}}
           <span class="up"></span>
           {{else}}
@@ -14,7 +14,7 @@
             Bricks: <span class="up"></span> {{up_bricks}} <span class="down"></span> {{down_bricks}}
           <span class="cluster-tag">{{cluster}}</span>
         </div>
-      {{/linkTo}}
+      {{/link-to}}
       {{else}}
           Loading...
     {{/each}}
