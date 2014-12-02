@@ -1,4 +1,6 @@
 gdash/dist
 *.pyc
 .cache*
-GlusterFS_Dashboard.egg-info/*
+gdash.egg-info/*
+dist/*
+

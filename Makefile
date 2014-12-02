@@ -1,4 +1,4 @@
-FLASK_APP=glusterdash
+FLASK_APP=gdash
 
 setup:
 	cd ui; npm install && bower install;

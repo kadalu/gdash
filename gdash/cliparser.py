@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-    glusterdash.cliparser.py
+    gdash.cliparser.py
 
     :copyright: (c) 2014 by Aravinda VK
     :license: MIT, see LICENSE for more details.

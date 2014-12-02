@@ -1,37 +1,43 @@
-GlusterFS Dashboard
-###################
+gdash - GlusterFS Dashboard
+###########################
 
 A simple webapp to show the status of GlusterFS volumes
 
 To install,
 
-.. code-block: bash
+.. code-block:: bash
 
-    git clone 
-    cd glusterdash
-    sudo python setup.py install
+    sudo pip install gdash
 
-Create a clusters.json file, example format 
+Create a clusters.conf file, specify atleast one host from each cluster.
 
-.. code-block: json
+Example format 
 
-    {
-        "cluster1": [host1, host2, host3],
-        "cluster2": [host4, host5, host6]
-    }
+.. code-block:: cfg
 
-Run ``glusterdash`` using, 
+    [clusters]
+    cluster1 = host1, host2, host3
+    cluster2 = host4, host5, host6
 
-.. code-block: bash
+Run :code:`gdash` using, 
 
-    sudo glusterdash ~/clusters.json
+.. code-block:: bash
+
+    sudo gdash ~/clusters.conf
 
 Available Options
------------------
+=================
 
---port, -p Port in which app will run
---cache, -c Time in seconds, default is 5. If page refreshed twice or page requested by multiple clients, Caches data instead of executing gluster commands multiple times.
+.. code-block:: text
 
-.. code-block: bash
+    positional arguments:
+        clusters           Clusters CONF file
 
-   sudo glusterdash ~/clusters.json -p 8000 -c 2
+    optional arguments:
+        -h, --help            show this help message and exit
+        --port PORT, -p PORT  Port
+        --cache CACHE, -c CACHE
+                              Cache output in seconds
+        --debug               DEBUG
+        --cluster CLUSTER     Limit dashboard only for specified cluster
+

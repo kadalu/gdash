@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-    glusterdash.main.py
+    gdash.main.py
 
     :copyright: (c) 2014 by Aravinda VK
     :license: MIT, see LICENSE for more details.
@@ -12,7 +12,7 @@ import ConfigParser
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 from flask.ext.cache import Cache
 
-from glusterdash.cliparser import parse
+from gdash.cliparser import parse
 
 
 PROG_DESCRIPTION = """
@@ -34,11 +34,13 @@ config = ConfigParser.RawConfigParser()
 def _get_args():
     parser = ArgumentParser(formatter_class=RawDescriptionHelpFormatter,
                             description=PROG_DESCRIPTION)
-    parser.add_argument('clusters', help="Clusters CONF file", type=str)
-    parser.add_argument('--port', help="Port", type=int, default=8080)
-    parser.add_argument('--cache', help="Cache output in seconds",
+    parser.add_argument('clusters_conf', help="Clusters CONF file", type=str)
+    parser.add_argument('--port', '-p', help="Port", type=int, default=8080)
+    parser.add_argument('--cache', '-c', help="Cache output in seconds",
                         type=int, default=5)
     parser.add_argument('--debug', help="DEBUG", action="store_true")
+    parser.add_argument('--cluster', help="Limit dashboard only for "
+                        "specified cluster")
 
     return parser.parse_args()
 
@@ -64,10 +66,11 @@ def get_data():
     if cached:
         result = cached
     else:
-        config.read(args.clusters)
+        config.read(args.clusters_conf)
         clusters = {}
         for name, value in config.items("clusters"):
-            clusters[name] = [x.strip() for x in value.split(",")]
+            if args.cluster is None or args.cluster == name:
+                clusters[name] = [x.strip() for x in value.split(",")]
 
         result = json.dumps(parse(clusters))
         app.cache.set('data', result, timeout=args.cache)
