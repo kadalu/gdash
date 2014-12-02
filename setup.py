@@ -12,15 +12,15 @@ from setuptools import setup
 setup(
     name="GlusterFS Dashboard",
     version="0.2",
-    packages=["glusterdash"],
+    packages=["gdash"],
     include_package_data=True,
     install_requires=['argparse', 'flask', 'Flask-Cache'],
     entry_points={
         "console_scripts": [
-            "glusterdash = glusterdash.app:main",
+            "gdash = gdash.app:main",
         ]
     },
-    package_data={'glusterdash': ['dist/*']},
+    package_data={'gdash': ['dist/*']},
     platforms="linux",
     zip_safe=False,
     author="Aravinda VK",
@@ -28,5 +28,5 @@ setup(
     description="GlusterFS Dashboard",
     license="MIT",
     keywords="glusterfs, gui, dashboard",
-    url="https://github.com/aravindavk/glusterdash",
+    url="https://github.com/aravindavk/gdash",
 )

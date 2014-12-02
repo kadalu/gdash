@@ -1,4 +1,4 @@
-glusterdash/dist
+gdash/dist
 *.pyc
 .cache*
 GlusterFS_Dashboard.egg-info/*
