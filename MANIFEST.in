@@ -1,2 +1,9 @@
-recursive-include gdash/dist *
-include gdash/fixtures/*
+include gdash/dist/*.html
+include gdash/dist/*.txt
+include gdash/dist/*.xml
+include gdash/dist/assets/*.js
+include gdash/dist/assets/*.css
+include gdash/dist/assets/images/*.png
+include gdash/dist/assets/images/*.gif
+include gdash/fixtures/*.conf
+include gdash/fixtures/*.json
