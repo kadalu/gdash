@@ -17,7 +17,7 @@ setup(
     install_requires=['argparse', 'flask', 'Flask-Cache'],
     entry_points={
         "console_scripts": [
-            "glusterdash = glusterdash.main:main",
+            "glusterdash = glusterdash.app:main",
         ]
     },
     package_data={'glusterdash': ['dist/*']},

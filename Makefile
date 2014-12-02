@@ -1,8 +1,11 @@
-FLASK_APP=glusterdash/
+FLASK_APP=glusterdash
+
+setup:
+	cd ui; npm install && bower install;
 
 buildui:
 	cd ui; ember build --environment production
 	rm -rf "$(FLASK_APP)/dist"
-	cp -r dist "$(FLASK_APP)/"
+	cp -r ui/dist "$(FLASK_APP)/"
 
-.PHONY: buildui
+.PHONY: setup buildui
