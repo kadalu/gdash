@@ -6,6 +6,9 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+    this.resource('volumes', function(){
+        this.route('volume', {path: ':volume_id'});
+    });
 });
 
 export default Router;

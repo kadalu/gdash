@@ -1,3 +1,223 @@
-html, body {
-  margin: 20px;
+/*
+ * -- BASE STYLES --
+ * Most of these are inherited from Base, but I want to change a few.
+ */
+body {
+    color: #333;
+    font-size: 13px;
+}
+
+
+
+a {
+    text-decoration: none;
+    color: #1b98f8;
+}
+
+#list a{
+    color: #777;
+}
+
+.brick-quick-status{
+    font-size: 10px;
+}
+
+/*
+ * -- LAYOUT STYLES --
+ * This layout consists of three main elements, `#nav` (navigation bar), `#list` (email list), and `#main` (email content). All 3 elements are within `#layout`
+ */
+#layout, #list, #main {
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * -- TABLET (AND UP) MEDIA QUERIES --
+ * On tablets and other medium-sized devices, we want to customize some
+ * of the mobile styles.
+ */
+@media (min-width: 40em) {
+
+    /* Move the layout over so we can fit the nav + list in on the left */
+    #layout {
+        padding-left:350px; /* "left col (nav + list)" width */
+        position: relative;
+    }
+
+    /* These are position:fixed; elements that will be in the left 500px of the screen */
+    #list {
+        position: fixed;
+        top: 50px;
+        bottom: 0;
+        overflow: auto;
+    }
+
+    #list {
+        margin-left: -350px;
+        width: 100%;
+        height: 33%;
+        border-bottom: 1px solid #ddd;
+    }
+
+    #main {
+        position: fixed;
+        top: 33%;
+        right: 0;
+        bottom: 0;
+        left: 150px;
+        overflow: auto;
+        width: auto; /* so that it's not 100% */
+    }
+
+}
+
+/*
+ * -- DESKTOP (AND UP) MEDIA QUERIES --
+ * On desktops and other large-sized devices, we want to customize some
+ * of the mobile styles.
+ */
+@media (min-width: 60em) {
+
+    /* This will take up the entire height, and be a little thinner */
+    #list {
+        margin-left: -350px;
+        width:350px;
+        height: 100%;
+        /* border-right: 1px solid #ddd; */
+    }
+
+    /* This will now take up it's own column, so don't need position: fixed; */
+    #main {
+        position: static;
+        margin: 50px 0;
+        padding: 0;
+    }
+}
+
+#list{
+    background-color: #eee;
+}
+
+#list .element{
+    height: 30px;
+    
+}
+#list .active{
+    display: block;
+    border: 0;
+    text-decoration: none;
+    background-color: #fff;
+}
+
+.up{
+    background:url("/assets/images/up.png") no-repeat;
+    background-position: left 0px top 3px;    
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+.down{
+    background:url("/assets/images/down.png") no-repeat;
+    background-position: left 0px top 3px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+
+.list-content a{
+    display: block;
+    padding: 5px 0px 5px 10px;
+    border-bottom: 1px solid #ddd;
+}
+.main-content{
+    padding: 20px 30px;
+}
+
+.cluster-tag{
+    display: inline-block;
+    background-color: #095398;
+    color: #fff;
+    float: right;
+    border-radius: 7px;
+    padding: 2px 5px;
+    font-size: 12px;
+    margin-right: 10px;
+}
+.small-bar-outer{
+    width: 100px;
+    height: 20px;
+    border: 1px solid #888;
+}
+.small-bar-inner{
+    height: 20px;
+}
+.page-title{
+    border-bottom: 1px solid #ddd;
+}
+.page-sub-title{
+    color: #777;
+    margin-bottom: 50px;
+}
+.brick-additional-details{
+    color: #888;
+    font-size: 12px;
+}
+.strong{
+    font-weight: bold;
+}
+.top-bar{
+    background-color: #999;
+    height: 30px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+.top-bar img{
+    height: 25px;
+}
+
+.red{
+    background-color: red;
+    color: #fff;
+}
+.green{
+    background-color: green;
+    color: #000;
+}
+
+.logo{
+    margin-left:10px;
+}
+.status-circle-up, .status-circle-down{
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+.status-circle-up{
+    background-color: green;
+}
+.status-circle-down{
+    background-color: red;
+}
+.last-updated{
+    position:fixed; 
+    left: 0px;
+    text-align: right;
+    width: 100%;
+    top: 30px;
+    z-index:10;
+    color: #666;
+    background-color: #ffdead;
+}
+.loading{
+    position: absolute;
+    top: 100px;
+    left: 20px;
+    width: 300px;
+    z-index: 20;
+    letter-spacing: normal;
 }

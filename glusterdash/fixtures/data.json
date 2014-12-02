@@ -1,0 +1,227 @@
+[
+    {
+        "bricks": [
+            {
+                "volume": "gv1",
+                "blockSize": 4096,
+                "device": "/dev/mapper/vg_0-thin_vol_0",
+                "fs": "xfs",
+                "hostUuid": "99f2feaa-dfd3-4c76-811c-d5f75db94f66",
+                "mntOptions": "rw,noatime,nodiratime,attr2,inode64,noquota",
+                "name": "fedoravm1:/bricks/brick0/b0",
+                "pid": 1496,
+                "port": "49156",
+                "sizeFree": 2102898688,
+                "sizeTotal": 2136997888,
+                "status": "up"
+            },
+            {
+                "volume": "gv1",
+                "blockSize": 4096,
+                "device": "/dev/mapper/vg_0-thin_vol_3",
+                "fs": "xfs",
+                "hostUuid": "99f2feaa-dfd3-4c76-811c-d5f75db94f66",
+                "mntOptions": "rw,noatime,nodiratime,attr2,inode64,noquota",
+                "name": "fedoravm1:/bricks/brick3/b0",
+                "pid": 1514,
+                "port": "49157",
+                "sizeFree": 1998036992,
+                "sizeTotal": 2032140288,
+                "status": "up"
+            }
+        ],
+        "cluster": "cluster2",
+        "distribute": 1,
+        "id": "d9812182-53c9-4efa-92e5-58cb95a627a1",
+        "name": "gv1",
+        "num_bricks": 2,
+        "options": [],
+        "replica": 1,
+        "status": "Started",
+        "stripe": 1,
+        "transport": "TCP",
+        "type": "DISTRIBUTE",
+        "up_bricks": 2
+    },
+    {
+        "bricks": [
+            {
+                "blockSize": 4096,
+                "device": "",
+                "fs": "ext4",
+                "hostUuid": "99f2feaa-dfd3-4c76-811c-d5f75db94f66",
+                "mntOptions": "",
+                "name": "fedoravm1:/bricks/brick0/b1",
+                "pid": 0,
+                "port": 0,
+                "sizeFree": 0,
+                "sizeTotal": 0,
+                "status": "down"
+            },
+            {
+                "blockSize": 4096,
+                "device": "ext4",
+                "fs": "",
+                "hostUuid": "99f2feaa-dfd3-4c76-811c-d5f75db94f66",
+                "mntOptions": "",
+                "name": "fedoravm1:/bricks/brick0/b2",
+                "pid": 0,
+                "port": 0,
+                "sizeFree": 0,
+                "sizeTotal": 0,
+                "status": "down"
+            },
+            {
+                "blockSize": 4096,
+                "device": "",
+                "fs": "ext4",
+                "hostUuid": "99f2feaa-dfd3-4c76-811c-d5f75db94f66",
+                "mntOptions": "",
+                "name": "fedoravm1:/bricks/brick0/b3",
+                "pid": 0,
+                "port": 0,
+                "sizeFree": 0,
+                "sizeTotal": 0,
+                "status": "down"
+            },
+            {
+                "blockSize": 4096,
+                "device": "",
+                "fs": "ext4",
+                "hostUuid": "99f2feaa-dfd3-4c76-811c-d5f75db94f66",
+                "mntOptions": "",
+                "name": "fedoravm1:/bricks/brick0/b4",
+                "pid": 0,
+                "port": 0,
+                "sizeFree": 0,
+                "sizeTotal": 0,
+                "status": "down"
+            }
+        ],
+        "cluster": "cluster2",
+        "distribute": 2,
+        "id": "7a008330-c644-4d34-a19c-0f959bb76847",
+        "name": "gv2",
+        "num_bricks": 4,
+        "options": [],
+        "replica": 2,
+        "status": "Created",
+        "stripe": 1,
+        "transport": "TCP",
+        "type": "DISTRIBUTED_REPLICATE",
+        "up_bricks": 0
+    },
+    {
+        "bricks": [
+            {
+                "blockSize": 4096,
+                "device": "/dev/mapper/vg_0-thin_vol_1",
+                "fs": "xfs",
+                "hostUuid": "99f2feaa-dfd3-4c76-811c-d5f75db94f66",
+                "mntOptions": "rw,noatime,nodiratime,attr2,inode64,noquota",
+                "name": "fedoravm1:/bricks/brick1/b0",
+                "pid": 1519,
+                "port": "49154",
+                "sizeFree": 2084794368,
+                "sizeTotal": 2136997888,
+                "status": "up"
+            }
+        ],
+        "cluster": "cluster2",
+        "distribute": 1,
+        "id": "ff94ccd4-1cc1-463e-899f-ac9fb5216f6b",
+        "name": "gvm",
+        "num_bricks": 1,
+        "options": [
+            {
+                "name": "geo-replication.indexing",
+                "value": "on"
+            },
+            {
+                "name": "geo-replication.ignore-pid-check",
+                "value": "on"
+            },
+            {
+                "name": "changelog.changelog",
+                "value": "on"
+            }
+        ],
+        "replica": 1,
+        "status": "Started",
+        "stripe": 1,
+        "transport": "TCP",
+        "type": "DISTRIBUTE",
+        "up_bricks": 1
+    },
+    {
+        "bricks": [
+            {
+                "blockSize": 4096,
+                "device": "/dev/mapper/vg_0-thin_vol_2",
+                "fs": "xfs",
+                "hostUuid": "99f2feaa-dfd3-4c76-811c-d5f75db94f66",
+                "mntOptions": "rw,noatime,nodiratime,attr2,inode64,noquota",
+                "name": "fedoravm1:/bricks/brick2/b0",
+                "pid": 1504,
+                "port": "49155",
+                "sizeFree": 2102894592,
+                "sizeTotal": 2136997888,
+                "status": "up"
+            }
+        ],
+        "cluster": "cluster2",
+        "distribute": 1,
+        "id": "ecaf5b25-c536-4249-9089-e31f77ea6cc7",
+        "name": "gvs",
+        "num_bricks": 1,
+        "options": [],
+        "replica": 1,
+        "status": "Started",
+        "stripe": 1,
+        "transport": "TCP",
+        "type": "DISTRIBUTE",
+        "up_bricks": 1
+    },
+    {
+        "bricks": [
+            {
+                "blockSize": 4096,
+                "device": "/dev/mapper/vg_unused-lv_root",
+                "fs": "xfs",
+                "hostUuid": "9d390a64-c1d7-4d09-9a82-b010a9bf6cec",
+                "mntOptions": "rw,seclabel,relatime,data=ordered",
+                "name": "sumne.sumne:/gfs/b4",
+                "pid": 24011,
+                "port": "49152",
+                "sizeFree": 11787079680,
+                "sizeTotal": 52710469632,
+                "status": "up"
+            },
+            {
+                "blockSize": 4096,
+                "device": "/dev/mapper/vg_unused-lv_root",
+                "fs": "xfs",
+                "hostUuid": "9d390a64-c1d7-4d09-9a82-b010a9bf6cec",
+                "mntOptions": "rw,seclabel,relatime,data=ordered",
+                "name": "sumne.sumne:/gfs/b5",
+                "pid": 24029,
+                "port": "49153",
+                "sizeFree": 11787079680,
+                "sizeTotal": 52710469632,
+                "status": "up"
+            }
+        ],
+        "cluster": "cluster1",
+        "distribute": 2,
+        "id": "dacaad1f-1d45-48af-baba-ddc089624dc9",
+        "name": "gv1",
+        "num_bricks": 2,
+        "options": [],
+        "replica": 2,
+        "status": "Started",
+        "stripe": 1,
+        "transport": "TCP",
+        "type": "REPLICATE",
+        "up_bricks": 2
+    }
+]

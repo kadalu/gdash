@@ -65,6 +65,12 @@ def get_data():
     return Response(result, content_type='application/json; charset=utf-8')
 
 
+@app.route("/api/data.json")
+def api():
+    return Response(open("fixtures/data.json").read(),
+                    content_type='application/json; charset=utf-8')
+
+
 def main():
     global args
     args = _get_args()

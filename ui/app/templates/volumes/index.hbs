@@ -1,0 +1,21 @@
+Volumes: {{num_volumes}} (up: {{up_volumes}}, down: {{down_volumes}}) Clusters: {{num_clusters}}
+<table class="pure-table pure-table-horizontal pure-table-striped">
+  <thead>
+    <tr>
+      <th>Cluster Name</th>
+      <th>Volumes</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each clusters}}
+      <tr>
+        <td>
+          {{name}}
+        </td>
+        <td>
+          <span class="up"></span> {{up_volumes}} <span class="down"></span> {{down_volumes}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
