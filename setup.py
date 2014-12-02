@@ -11,7 +11,7 @@ from setuptools import setup
 
 setup(
     name="GlusterFS Dashboard",
-    version="0.1",
+    version="0.2",
     packages=["glusterdash"],
     include_package_data=True,
     install_requires=['argparse', 'flask', 'Flask-Cache'],
