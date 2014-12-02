@@ -75,7 +75,7 @@ def main():
     global args
     args = _get_args()
     app.debug = args.debug
-    app.run(port=args.port)
+    app.run(host='0.0.0.0', port=args.port)
 
 
 if __name__ == "__main__":

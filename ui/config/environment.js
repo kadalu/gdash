@@ -6,6 +6,7 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
+    apiUrl: '/fixtures/data.json',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -40,7 +41,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+      ENV.apiUrl = '/data';
   }
 
   return ENV;
