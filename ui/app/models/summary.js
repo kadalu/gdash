@@ -28,6 +28,9 @@ export default Ember.Object.extend({
     num_volumes: function(){
         return this.get("vols").length;
     }.property("vols"),
+    num_volumes_txt: function(){
+        return this.get("vols").length === 1 ? 'volume' : 'volumes';
+    }.property("vols"),
     up_volumes: function(){
         var up_volumes = 0;
         this.get("vols").forEach(function(val){
@@ -42,5 +45,8 @@ export default Ember.Object.extend({
     }.property("num_volumes", "up_volumes"),
     num_clusters: function(){
         return this.get("clusters").length;
-    }.property("vols")
+    }.property("clusters"),
+    num_clusters_txt: function(){
+        return this.get("clusters").length === 1 ? 'cluster' : 'clusters';
+    }.property("clusters")
 });

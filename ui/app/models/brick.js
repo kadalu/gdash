@@ -1,6 +1,14 @@
 import Ember from "ember";
 
 export default Ember.Object.extend({
+    brick_status_class: function(){
+        if (this.get("status").toLowerCase() === "up"){
+            return "up";
+        }
+        else{
+            return "down";
+        }
+    }.property("status"),
     brick_up: function(){
         return this.get("status").toLowerCase() === "up";
     }.property("status"),

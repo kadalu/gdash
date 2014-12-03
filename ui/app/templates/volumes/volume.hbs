@@ -1,9 +1,5 @@
 <h2 class="page-title">
-  {{#if volume_up}}
-    <div class="status-circle-up"></div>
-    {{else}}
-    <div class="status-circle-down"></div>
-  {{/if}}
+  <div {{bind-attr class="volume_status_class"}}></div>
   {{name}}
 </h2>
 <div class="page-sub-title">
@@ -36,11 +32,7 @@
       {{#each bricks}}
         <tr>
           <td>
-            {{#if brick_up}}
-              <span class="up"></span>
-              {{else}}
-              <span class="down"></span>
-            {{/if}}
+            <span {{bind-attr class="brick_status_class"}}></span>
             {{name}}
             <div class="brick-additional-details">{{hostUuid}}</div>
           </td>

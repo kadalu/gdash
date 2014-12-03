@@ -2,18 +2,14 @@
   <div class="list-content">
     {{#each model}}
       {{#link-to "volumes.volume" this}}
-        {{#if volume_up}}
-          <span class="up"></span>
-          {{else}}
-          <span class="down"></span>
-        {{/if}}
-        <strong>{{name}}</strong>
-        <div>{{id}}</div>
+        <div {{bind-attr class="volume_status_class"}}></div>
+        <strong class="list-vol-name">{{name}}</strong>
         <div>{{type}}</div>
         <div class="brick-quick-status">
             Bricks: <span class="up"></span> {{up_bricks}} <span class="down"></span> {{down_bricks}}
           <span class="cluster-tag">{{cluster}}</span>
         </div>
+        <div class="volume-id-small">{{id}}</div>
       {{/link-to}}
       {{else}}
         No Volumes available.

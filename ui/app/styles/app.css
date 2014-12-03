@@ -3,7 +3,7 @@
  * Most of these are inherited from Base, but I want to change a few.
  */
 body {
-    color: #333;
+    color: #222;
     font-size: 13px;
 }
 
@@ -31,6 +31,9 @@ a {
     padding: 0;
 }
 
+#list{
+    margin-top: 68px;
+}
 /*
  * -- TABLET (AND UP) MEDIA QUERIES --
  * On tablets and other medium-sized devices, we want to customize some
@@ -47,9 +50,10 @@ a {
     /* These are position:fixed; elements that will be in the left 500px of the screen */
     #list {
         position: fixed;
-        top: 60px;
+        top: 68px;
         bottom: 0;
         overflow: auto;
+        margin-top: 0px;
     }
 
     #list {
@@ -83,6 +87,7 @@ a {
         margin-left: -350px;
         width:350px;
         height: 100%;
+        margin-top: 0px;
         /* border-right: 1px solid #ddd; */
     }
 
@@ -142,6 +147,7 @@ a {
     padding: 2px 5px;
     font-size: 12px;
     margin-right: 10px;
+    margin-top: 5px;
 }
 .small-bar-outer{
     width: 100px;
@@ -166,8 +172,8 @@ a {
     font-weight: bold;
 }
 .top-bar{
-    background-color: #999;
-    height: 30px;
+    background-color: #222;
+    height: 40px;
     position: fixed;
     width: 100%;
     top: 0;
@@ -175,6 +181,8 @@ a {
     z-index: 10;
 }
 .top-bar img{
+    margin-top:7px;
+    margin-bottom:7px;
     height: 25px;
 }
 
@@ -192,10 +200,10 @@ a {
 }
 .status-circle-up, .status-circle-down{
     float: left;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     margin-right: 10px;
-    border-radius: 10px;
+    border-radius: 50%;
 }
 .status-circle-up{
     background-color: green;
@@ -208,10 +216,12 @@ a {
     left: 0px;
     text-align: right;
     width: 100%;
-    top: 30px;
+    top: 40px;
     z-index:10;
     color: #666;
     background-color: #ffdead;
+    height: 28px;
+    overflow: hidden;
 }
 .loading{
     position: absolute;
@@ -223,4 +233,59 @@ a {
 }
 .disk-usage-column{
     font-size: 10px;
+}
+.volumes-circle, .clusters-circle{
+    border-radius: 50%;
+    float: left;
+    margin-right: 40px;
+    position: relative;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+.volumes-circle{
+    background-color: #b0c4de;
+    width: 200px;
+    height: 200px;
+}
+.volumes-circle-num{
+    font-size: 60px;
+}
+.volumes-circle-txt{
+    font-size: 25px;
+}
+.clusters-circle{
+    background-color: #deb887;
+    width: 140px;
+    height: 140px;
+}
+.clusters-circle-num{
+    font-size: 50px;
+}
+.clusters-circle-txt{
+    font-size: 20px;
+}
+.spacer{
+    clear: both;
+    height: 20px;
+    width: 100%;
+}
+.center-align{
+    /* http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/ */
+    text-align: center;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.volume-id-small{
+    width: 100%;
+    margin-top:7px;
+    font-size: 11px;
+}
+.list-vol-name{
+    margin-bottom: 7px;
+    display: block;
+    color: #111;
 }
