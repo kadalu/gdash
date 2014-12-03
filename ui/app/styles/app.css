@@ -289,3 +289,14 @@ a {
     display: block;
     color: #111;
 }
+.subtitle{
+    color: #aaa;
+    display: block;
+    float: left;
+    margin-left: 10px;
+    margin-top: 20px;
+}
+.logo-link{
+    display: block;
+    float: left;
+}

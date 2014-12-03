@@ -10,6 +10,16 @@ To install,
 
     sudo pip install gdash
 
+.. figure:: https://github.com/aravindavk/gdash/blob/master/screenshots/gdash-home.png
+   :alt: gdash home screen
+
+   gdash home screen
+
+.. figure:: https://github.com/aravindavk/gdash/blob/master/screenshots/gdash-detail
+   :alt: gdash detail screen
+
+   gdash Volume details page
+
 Usage
 =====
 Usecase 1 - Local Volumes
