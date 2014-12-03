@@ -11,7 +11,7 @@ from setuptools import setup
 
 setup(
     name="gdash",
-    version="0.2",
+    version="0.3",
     packages=["gdash"],
     include_package_data=True,
     install_requires=['argparse', 'flask', 'Flask-Cache'],

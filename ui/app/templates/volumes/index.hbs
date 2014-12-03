@@ -1,3 +1,4 @@
+{{#if num_volumes}}
 Volumes: {{num_volumes}} (up: {{up_volumes}}, down: {{down_volumes}}) Clusters: {{num_clusters}}
 <table class="pure-table pure-table-horizontal pure-table-striped">
   <thead>
@@ -19,3 +20,4 @@ Volumes: {{num_volumes}} (up: {{up_volumes}}, down: {{down_volumes}}) Clusters: 
     {{/each}}
   </tbody>
 </table>
+{{/if}}

@@ -47,10 +47,12 @@
           {{#if brick_up}}
             <td>{{fs}}</td>
             <td>
-              <div class="small-bar-outer">
-                <div {{bindAttr class=":small-bar-inner barColor"}} {{bindAttr style="usedPercentageWidth"}}>
-                  {{usedPercentage}}%
+              <div class="disk-usage-column">
+                {{usedPercentage}}%
+                <div class="small-bar-outer">
+                  <div {{bindAttr class=":small-bar-inner barColor"}} {{bindAttr style="usedPercentageWidth"}}></div>
                 </div>
+                {{sizeUsedStr}}/{{sizeTotalStr}}
               </div>
             </td>
             <td>{{pid}}</td>

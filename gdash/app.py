@@ -6,11 +6,13 @@
     :license: MIT, see LICENSE for more details.
 """
 
-from flask import Flask, render_template, Response
-import json
-import ConfigParser
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
+import ConfigParser
+from flask import Flask, render_template, Response
 from flask.ext.cache import Cache
+import json
+import os
+import sys
 
 from gdash.cliparser import parse
 
@@ -34,12 +36,17 @@ config = ConfigParser.RawConfigParser()
 def _get_args():
     parser = ArgumentParser(formatter_class=RawDescriptionHelpFormatter,
                             description=PROG_DESCRIPTION)
-    parser.add_argument('clusters_conf', help="Clusters CONF file", type=str)
     parser.add_argument('--port', '-p', help="Port", type=int, default=8080)
     parser.add_argument('--cache', '-c', help="Cache output in seconds",
                         type=int, default=5)
     parser.add_argument('--debug', help="DEBUG", action="store_true")
-    parser.add_argument('--cluster', help="Limit dashboard only for "
+
+    parser.add_argument('--host',
+                        help="Remote host which is part of cluster")
+    parser.add_argument('--clusters', help="Clusters CONF file",
+                        type=str)
+    parser.add_argument('--limit-cluster',
+                        help="Limit dashboard only for "
                         "specified cluster")
 
     return parser.parse_args()
@@ -66,11 +73,16 @@ def get_data():
     if cached:
         result = cached
     else:
-        config.read(args.clusters_conf)
-        clusters = {}
-        for name, value in config.items("clusters"):
-            if args.cluster is None or args.cluster == name:
-                clusters[name] = [x.strip() for x in value.split(",")]
+        if args.host:
+            clusters = {"default": [args.host.strip()]}
+        elif args.clusters:
+            config.read(args.clusters)
+            clusters = {}
+            for name, value in config.items("clusters"):
+                if args.limit_cluster is None or args.limit_cluster == name:
+                    clusters[name] = [x.strip() for x in value.split(",")]
+        else:
+            clusters = {"default": ["localhost"]}
 
         result = json.dumps(parse(clusters))
         app.cache.set('data', result, timeout=args.cache)
@@ -87,6 +99,10 @@ def api():
 def main():
     global args
     args = _get_args()
+    if os.getuid() != 0:
+        sys.stderr.write("Only root can run this\n")
+        sys.exit(1)
+
     app.debug = args.debug
     app.run(host='0.0.0.0', port=args.port)
 

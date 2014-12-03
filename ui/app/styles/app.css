@@ -47,7 +47,7 @@ a {
     /* These are position:fixed; elements that will be in the left 500px of the screen */
     #list {
         position: fixed;
-        top: 50px;
+        top: 60px;
         bottom: 0;
         overflow: auto;
     }
@@ -145,11 +145,11 @@ a {
 }
 .small-bar-outer{
     width: 100px;
-    height: 20px;
+    height: 10px;
     border: 1px solid #888;
 }
 .small-bar-inner{
-    height: 20px;
+    height: 10px;
 }
 .page-title{
     border-bottom: 1px solid #ddd;
@@ -220,4 +220,7 @@ a {
     width: 300px;
     z-index: 20;
     letter-spacing: normal;
+}
+.disk-usage-column{
+    font-size: 10px;
 }

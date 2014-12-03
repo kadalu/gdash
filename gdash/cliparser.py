@@ -10,6 +10,13 @@ import xml.etree.cElementTree as etree
 import subprocess
 
 
+SIZE_SYMBOLS = ('K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y')
+SIZE_UNITS = {}
+
+for i, s in enumerate(SIZE_SYMBOLS):
+    SIZE_UNITS[s] = 1 << (i+1)*10
+
+
 class RemoteExecuteFailed(Exception):
     pass
 
@@ -34,6 +41,16 @@ def execute(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
     return (p.returncode, out, err)
 
 
+def format_diskusage_human_readable(num):
+    for s in reversed(SIZE_SYMBOLS):
+        if num >= SIZE_UNITS[s]:
+            value = float(num) / SIZE_UNITS[s]
+            return '%.1f%s' % (value, s)
+
+    # n is less than 1024B
+    return '%.1fB' % num
+
+
 def _parse_a_vol_status(volume_el):
     value = {}
     up_bricks = 0
@@ -43,14 +60,21 @@ def _parse_a_vol_status(volume_el):
         if b.find('status').text == '1':
             up_bricks += 1
 
+        size_free = long(b.find('sizeFree').text)
+        size_total = long(b.find('sizeTotal').text)
+
         value[name] = {
             'name': name,
             'hostUuid': b.find('peerid').text,
             'status': 'up' if b.find('status').text == '1' else 'down',
             'port': b.find('port').text,
             'pid': b.find('pid').text,
-            'sizeTotal': long(b.find('sizeTotal').text),
-            'sizeFree': long(b.find('sizeFree').text),
+            'sizeTotal': size_total,
+            'sizeFree': size_free,
+            'sizeTotalStr': format_diskusage_human_readable(
+                size_total),
+            'sizeUsedStr': format_diskusage_human_readable(
+                size_total-size_free),
             'fs': b.find('fsName').text,
             'device': b.find('device').text,
             'blockSize': int(b.find('blockSize').text),
