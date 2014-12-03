@@ -74,13 +74,16 @@ Available Options
       --limit-cluster LIMIT_CLUSTER
                             Limit dashboard only for specified cluster
 
+
 Technical details
 =================
 Python, Python Flask, emberjs, ember-cli
 
+
 Blog
 ====
 http://aravindavk.in/blog/introducing-gdash
+
 
 Issues
 ======
