@@ -15,7 +15,7 @@ To install,
 
    gdash home screen
 
-.. figure:: https://github.com/aravindavk/gdash/blob/master/screenshots/gdash-detail
+.. figure:: https://github.com/aravindavk/gdash/blob/master/screenshots/gdash-detail.png
    :alt: gdash detail screen
 
    gdash Volume details page
