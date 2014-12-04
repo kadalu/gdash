@@ -131,8 +131,8 @@ def _parse_a_vol(cluster_name, volume_el):
     return value
 
 
-def get_vol_info_from_host(cluster_name, host):
-    cmd = ['gluster', 'volume', 'info', "--xml", "--remote-host=%s" % host]
+def get_vol_info_from_host(cluster_name, host, args):
+    cmd = [args.gluster, 'volume', 'info', "--xml", "--remote-host=%s" % host]
     rc, data, err = execute(cmd)
     if not rc == 0:
         raise RemoteExecuteFailed("Remote Execution failed: %s" % err)
@@ -148,8 +148,8 @@ def get_vol_info_from_host(cluster_name, host):
     return volumes
 
 
-def get_vol_status_from_host(cluster_name, host):
-    cmd = ['gluster', 'volume', 'status', 'all', 'detail', "--xml",
+def get_vol_status_from_host(cluster_name, host, args):
+    cmd = [args.gluster, 'volume', 'status', 'all', 'detail', "--xml",
            "--remote-host=%s" % host]
     rc, data, err = execute(cmd)
     if not rc == 0:
@@ -170,32 +170,32 @@ def get_vol_status_from_host(cluster_name, host):
     return volumes
 
 
-def get_vol_info(cluster_name, hosts):
+def get_vol_info(cluster_name, hosts, args):
     for host in hosts:
         try:
-            return get_vol_info_from_host(cluster_name, host)
+            return get_vol_info_from_host(cluster_name, host, args)
         except RemoteExecuteFailed:
             continue
 
     return []
 
 
-def get_vol_status(cluster_name, hosts):
+def get_vol_status(cluster_name, hosts, args):
     for host in hosts:
         try:
-            return get_vol_status_from_host(cluster_name, host)
+            return get_vol_status_from_host(cluster_name, host, args)
         except RemoteExecuteFailed:
             continue
 
     return {}
 
 
-def get_volumes(cluster_name, hosts):
+def get_volumes(cluster_name, hosts, args):
     # Get Volume Info
-    vols = get_vol_info(cluster_name, hosts)
+    vols = get_vol_info(cluster_name, hosts, args)
 
     # Get Volume Status
-    vol_status = get_vol_status(cluster_name, hosts)
+    vol_status = get_vol_status(cluster_name, hosts, args)
 
     # Iterate Volumes and update Volume Status
     for v_idx, v in enumerate(vols):
@@ -212,10 +212,10 @@ def get_volumes(cluster_name, hosts):
     return vols
 
 
-def parse(clusters):
+def parse(clusters, args):
     volumes = []
     for cluster_name, hosts in clusters.iteritems():
-        volumes += get_volumes(cluster_name, hosts)
+        volumes += get_volumes(cluster_name, hosts, args)
 
     return volumes
 

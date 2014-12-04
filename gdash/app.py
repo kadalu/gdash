@@ -48,6 +48,9 @@ def _get_args():
     parser.add_argument('--limit-cluster',
                         help="Limit dashboard only for "
                         "specified cluster")
+    parser.add_argument('--gluster',
+                        help="If your gluster is not in /usr/sbin/gluster",
+                        default="/usr/sbin/gluster")
 
     return parser.parse_args()
 
@@ -84,7 +87,7 @@ def get_data():
         else:
             clusters = {"default": ["localhost"]}
 
-        result = json.dumps(parse(clusters))
+        result = json.dumps(parse(clusters, args))
         app.cache.set('data', result, timeout=args.cache)
 
     return Response(result, content_type='application/json; charset=utf-8')
