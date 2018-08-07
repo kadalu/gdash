@@ -14,7 +14,7 @@ setup(
     version="0.4",
     packages=["gdash"],
     include_package_data=True,
-    install_requires=['argparse', 'flask', 'Flask-Cache'],
+    install_requires=['argparse', 'flask', 'Flask-Caching'],
     entry_points={
         "console_scripts": [
             "gdash = gdash.app:main",
