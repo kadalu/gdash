@@ -9,7 +9,7 @@
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 import ConfigParser
 from flask import Flask, render_template, Response
-from flask.ext.cache import Cache
+from flask_cache import Cache
 import json
 import os
 import sys
