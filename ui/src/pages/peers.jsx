@@ -1,0 +1,63 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+import { Content } from '../components/content.jsx'
+
+function peerStatus(peer) {
+    let cls = 'inline-block px-2 py-1 text-sm rounded-lg '
+    if (peer.connected === 'Connected') {
+        cls += 'bg-green-500 text-white'
+    } else {
+        cls += 'bg-red-500 text-white'
+    }
+    return (
+        <span className={cls}>{peer.connected}</span>
+    );
+}
+
+function peersUI(peers) {
+    return (
+        <table className="border border-indigo-100 rounded-lg shadow-lg" style={{width: "90%"}}>
+            <thead>
+                <tr className="bg-indigo-100">
+                    <th className="px-5 py-2 uppercase text-left">Peer Address</th>
+                    <th className="px-5 py-2 uppercase text-left">State</th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    peers.map((peer, idx) => {
+                        return (
+                            <tr key={idx} className="border-b border-indigo-100 hover:bg-gray-100">
+                                <td className="px-5 py-2" style={{minWidth: "250px"}}>
+                                    {peer.hostname}<div className="text-sm text-gray-700">{peer.uuid}</div>
+                                </td>
+                                <td className="px-5 py-2">{peerStatus(peer)}</td>
+                            </tr>
+                        );
+                    })
+                }
+            </tbody>
+        </table>
+    )
+}
+
+export function Peers() {
+    let elements = [
+        {label: "Peers", url: ''}
+    ];
+
+    const [peers, setPeers] = useState([]);
+    const [refreshRequired, setRefreshRequired] = useState(new Date());
+
+    useEffect(() => {
+        axios.get("/api/peers")
+             .then((resp) => {
+                 setPeers(resp.data);
+             });
+    }, [refreshRequired]);
+
+    return (
+        <Content breadcrumb={elements} data={peersUI(peers)} setRefreshRequired={setRefreshRequired} />
+    );
+}
