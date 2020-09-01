@@ -56,8 +56,13 @@ export function Volumes({ history }) {
         axios.get("/api/volumes")
              .then((resp) => {
                  setVolumes(resp.data);
+             })
+             .catch(err => {
+                 if (err.response.status === 403) {
+                     history.push('/login');
+                 }
              });
-    }, [refreshRequired]);
+    }, [refreshRequired, history]);
 
     return (
         <Content breadcrumb={elements} data={volumesUI(history, volumes)} setRefreshRequired={setRefreshRequired} />

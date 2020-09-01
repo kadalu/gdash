@@ -115,7 +115,7 @@ function volumeDetailUI(volumeId, volumes) {
     )
 }
 
-export function VolumeDetail() {
+export function VolumeDetail({ history }) {
     const { volumeId } = useParams();
     const [volumes, setVolumes] = useState([]);
     const [refreshRequired, setRefreshRequired] = useState(new Date());
@@ -127,8 +127,13 @@ export function VolumeDetail() {
         axios.get("/api/volumes")
              .then((resp) => {
                  setVolumes(resp.data);
+             })
+             .catch(err => {
+                 if (err.response.status === 403) {
+                     history.push('/login');
+                 }
              });
-    }, [refreshRequired]);
+    }, [refreshRequired, history]);
 
     useEffect(() => {
         let volume = {};
