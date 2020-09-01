@@ -171,7 +171,7 @@ def get_args():
     return parser.parse_args()
 
 
-if __name__ == '__main__':
+def main():
     args = get_args()
 
     if args.auth_file is not None:
@@ -187,3 +187,7 @@ if __name__ == '__main__':
     webapp = GdashWeb()
     webapp.api = GdashApis()
     cherrypy.quickstart(webapp, '/', conf)
+
+
+if __name__ == '__main__':
+    main()

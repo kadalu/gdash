@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-
 export function Sidebar() {
     return (
         <div className="bg-indigo-900 text-yellow-200 h-screen">

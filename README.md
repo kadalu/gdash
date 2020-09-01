@@ -3,10 +3,7 @@
 ## Install
 
 ```
-curl -LO https://github.com/kadalu/gdash/releases/download/v1.0.0/gdash
-chmod +x ./gdash
-sudo mv ./gdash /usr/local/bin/gdash
-gdash --version
+sudo pip3 install gdash
 ```
 
 ## Usage

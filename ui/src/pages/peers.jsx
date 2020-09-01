@@ -47,22 +47,28 @@ export function Peers({ history }) {
         {label: "Peers", url: ''}
     ];
 
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(true);
     const [peers, setPeers] = useState([]);
     const [refreshRequired, setRefreshRequired] = useState(new Date());
 
     useEffect(() => {
         axios.get("/api/peers")
              .then((resp) => {
+                 setLoading(false);
                  setPeers(resp.data);
              })
              .catch(err => {
                  if (err.response.status === 403) {
                      history.push('/login');
+                 } else {
+                     setLoading(false);
+                     setError("Failed to get data from the server(HTTP Status: " + err.response.status + ")");
                  }
              });
     }, [refreshRequired, history]);
 
     return (
-        <Content breadcrumb={elements} data={peersUI(peers)} setRefreshRequired={setRefreshRequired} />
+        <Content breadcrumb={elements} data={peersUI(peers)} setRefreshRequired={setRefreshRequired} loading={loading} error={error} />
     );
 }
