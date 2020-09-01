@@ -62,16 +62,30 @@ def forbidden():
 class GdashApis(object):
     @cherrypy.expose
     def login(self):
-        if users is None:
+        if is_admin():
             return {}
 
-        data = cherrypy.request.json
-        if is_valid_admin_login(data['username'], data['password']):
-            cherrypy.session['role'] = 'admin'
-            cherrypy.session['username'] = data['username']
-            return {}
+        if cherrypy.request.method == 'POST':
+            data = cherrypy.request.json
+            if is_valid_admin_login(data['username'], data['password']):
+                cherrypy.session['role'] = 'admin'
+                cherrypy.session['username'] = data['username']
+                return {}
 
         return forbidden()
+
+    @cherrypy.expose
+    def logout(self):
+        if not is_admin():
+            return {}
+
+        if cherrypy.session.get('role', None) is not None:
+            del cherrypy.session['role']
+
+        if cherrypy.session.get('username', None) is not None:
+            del cherrypy.session['username']
+
+        return {}
 
     @cherrypy.expose
     def volumes(self):

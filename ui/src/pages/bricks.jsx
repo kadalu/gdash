@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 
 import { Content } from '../components/content.jsx'
-import { brickStatus, volumeStatus, capitalize, sizeUtilization, inodesUtilization } from '../components/helpers';
+import { brickStatus, sizeUtilization, inodesUtilization } from '../components/helpers';
 
 function bricksUI(volumes) {
 
@@ -46,7 +46,7 @@ function bricksUI(volumes) {
     )
 }
 
-export function Bricks() {
+export function Bricks({ history }) {
     let elements = [
         {label: "Bricks", url: ''}
     ];
@@ -58,8 +58,13 @@ export function Bricks() {
         axios.get("/api/volumes")
              .then((resp) => {
                  setVolumes(resp.data);
+             })
+             .catch(err => {
+                 if (err.response.status === 403) {
+                     history.push('/login');
+                 }
              });
-    }, [refreshRequired]);
+    }, [refreshRequired, history]);
 
     return (
         <Content breadcrumb={elements} data={bricksUI(volumes)} setRefreshRequired={setRefreshRequired} />

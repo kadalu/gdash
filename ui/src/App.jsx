@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import { Login } from './pages/login.jsx';
+import { Logout } from './pages/logout.jsx';
 import { Dashboard } from './pages/dashboard.jsx';
 import { Volumes } from './pages/volumes.jsx';
 import { Peers } from './pages/peers.jsx';
@@ -16,28 +17,22 @@ function App() {
     return (
         <Router>
             <Switch>
-                <Route path="/login">
-                    <Login />
-                </Route>
-                <Route path="/dashboard">
-                    <Dashboard />
-                </Route>
+                <Route path="/login"
+                       component={Login}/>
+                <Route path="/dashboard"
+                       component={Dashboard}/>
                 <Route path="/volumes/:volumeId"
                        component={VolumeDetail}/>
                 <Route path="/volumes"
                        component={Volumes}/>
-                <Route path="/peers">
-                    <Peers />
-                </Route>
-                <Route path="/bricks">
-                    <Bricks />
-                </Route>
-                <Route path="/logout">
-                    <Login />
-                </Route>
-                <Route path="/">
-                    <Dashboard />
-                </Route>
+                <Route path="/peers"
+                       component={Peers}/>
+                <Route path="/bricks"
+                       component={Bricks}/>
+                <Route path="/logout"
+                       component={Logout}/>
+                <Route path="/"
+                       component={Dashboard}/>
             </Switch>
         </Router>
     );

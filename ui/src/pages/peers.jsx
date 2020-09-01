@@ -42,7 +42,7 @@ function peersUI(peers) {
     )
 }
 
-export function Peers() {
+export function Peers({ history }) {
     let elements = [
         {label: "Peers", url: ''}
     ];
@@ -54,8 +54,13 @@ export function Peers() {
         axios.get("/api/peers")
              .then((resp) => {
                  setPeers(resp.data);
+             })
+             .catch(err => {
+                 if (err.response.status === 403) {
+                     history.push('/login');
+                 }
              });
-    }, [refreshRequired]);
+    }, [refreshRequired, history]);
 
     return (
         <Content breadcrumb={elements} data={peersUI(peers)} setRefreshRequired={setRefreshRequired} />
