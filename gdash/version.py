@@ -1,0 +1,2 @@
+"""Version"""
+VERSION = "master"
