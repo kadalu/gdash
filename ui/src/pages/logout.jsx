@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export function Logout({ history }) {
     const [message, setMessage] = useState("");
+    const [error, setError] = useState("");
 
     useEffect(() => {
         axios.get("/api/logout")
@@ -11,14 +12,22 @@ export function Logout({ history }) {
                  setInterval(() => {
                      history.push('/login');
                  }, 2000);
+             }).catch(err => {
+                 setError("Failed to get data from the server(HTTP Status: " + err.response.status + ")");
              });
     }, [history]);
-
+    
     return (
-        <div className="w-full md:w-1/2 lg:w-1/4 m-auto py-10 bg-indigo-100 md:mt-10 h-screen md:h-auto rounded-lg shadow-lg">
-            <div className="text-center">
-                {message}
-            </div>
+        <div className="w-full md:w-1/2 lg:w-1/4 m-auto bg-indigo-100 md:mt-10 h-screen md:h-auto rounded-lg shadow-lg">
+            {
+                error === '' ?
+                <div className="text-center my-10">
+                    {message}
+                </div> :
+                <div className="bg-red-300 p-5 rounded-lg border border-red-400">
+                    {error}
+                </div>
+            }
         </div>
     );
 }

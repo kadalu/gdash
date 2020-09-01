@@ -49,22 +49,28 @@ export function Volumes({ history }) {
         {label: "Volumes", url: ''}
     ];
 
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(true);
     const [volumes, setVolumes] = useState([]);
     const [refreshRequired, setRefreshRequired] = useState(new Date());
 
     useEffect(() => {
         axios.get("/api/volumes")
              .then((resp) => {
+                 setLoading(false);
                  setVolumes(resp.data);
              })
              .catch(err => {
                  if (err.response.status === 403) {
                      history.push('/login');
+                 } else {
+                     setLoading(false);
+                     setError("Failed to get data from the server(HTTP Status: " + err.response.status + ")");
                  }
              });
     }, [refreshRequired, history]);
 
     return (
-        <Content breadcrumb={elements} data={volumesUI(history, volumes)} setRefreshRequired={setRefreshRequired} />
+        <Content breadcrumb={elements} data={volumesUI(history, volumes)} setRefreshRequired={setRefreshRequired} loading={loading} error={error} />
     );
 }

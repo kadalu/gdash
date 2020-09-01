@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { Content } from '../components/content.jsx'
+import { Content } from '../components/content.jsx';
 
 function Box({label, value, onClick}) {
     return (
@@ -49,6 +49,8 @@ export function Dashboard({ history }) {
         {label: "Dashboard", url: ''}
     ];
 
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(true);
     const [peers, setPeers] = useState([]);
     const [volumes, setVolumes] = useState([]);
     const [refreshRequired, setRefreshRequired] = useState(new Date());
@@ -56,11 +58,15 @@ export function Dashboard({ history }) {
     useEffect(() => {
         axios.get("/api/volumes")
              .then((resp) => {
+                 setLoading(false);
                  setVolumes(resp.data);
              })
              .catch(err => {
                  if (err.response.status === 403) {
                      history.push('/login');
+                 } else {
+                     setLoading(false);
+                     setError("Failed to get data from the server(HTTP Status: " + err.response.status + ")");
                  }
              });
 
@@ -76,6 +82,6 @@ export function Dashboard({ history }) {
     }, [refreshRequired, history]);
 
     return (
-        <Content breadcrumb={elements} data={dashboardUI(history, volumes, peers)} setRefreshRequired={setRefreshRequired} />
+        <Content breadcrumb={elements} data={dashboardUI(history, volumes, peers)} setRefreshRequired={setRefreshRequired} loading={loading} error={error} />
     );
 }

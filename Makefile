@@ -16,7 +16,7 @@ release: gen-version build-ui
 	@rm -rf build
 	@mkdir -p build/src
 	@cp -r gdash/* build/src/
-	@${PYTHON} -m pip install -r requirements.txt --target build/src
+	@${PYTHON} -m pip install --system -r requirements.txt --target build/src
 	@cp -r ui/build build/src/ui
 	@cd build/src && zip -r ../${PROGNAME}.zip *
 	@echo '#!/usr/bin/env ${PYTHON}' | cat - build/${PROGNAME}.zip > build/${PROGNAME}
@@ -25,4 +25,8 @@ release: gen-version build-ui
 	@rm -f build/${PROGNAME}.zip
 	@echo "Single deployment file is ready: build/${PROGNAME}"
 
-.PHONY: help release gen-version build-ui
+pypi-release: gen-version build-ui
+	@cp -r ui/build gdash/ui
+	python3 setup.py sdist
+
+.PHONY: help release gen-version build-ui pypi-release

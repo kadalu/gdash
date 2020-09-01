@@ -1,58 +1,59 @@
 # -*- coding: utf-8 -*-
-"""
-    gdash.setup.py
-
-    :copyright: (c) 2014 by Aravinda VK
-    :license: MIT, see LICENSE for more details.
-"""
-
 from setuptools import setup
+
+def get_version():
+    from gdash.version import VERSION
+    return VERSION
 
 
 setup(
     name="gdash",
-    version="0.4",
+    version=get_version(),
     packages=["gdash"],
     include_package_data=True,
-    install_requires=['argparse', 'flask', 'Flask-Caching'],
+    install_requires=['cherrypy', 'glustercli'],
     entry_points={
         "console_scripts": [
-            "gdash = gdash.app:main",
+            "gdash = gdash.__main__:main",
         ]
     },
-    package_data={'gdash': ['dist/*.html',
-                            'dist/*.txt',
-                            'dist/*.xml',
-                            'dist/assets/*.js',
-                            'dist/assets/*.css',
-                            'dist/assets/images/*.png',
-                            'dist/assets/images/*.gif',
-                            'fixtures/*.conf',
-                            'fixtures/*.json']},
+    package_data={
+        'gdash': [
+            'ui/*.json',
+            'ui/*.html',
+            'ui/*.png',
+            'ui/*.js',
+            'ui/*.txt',
+            'ui/static/js/*.js',
+            'ui/static/js/*.js.map',
+            'ui/static/js/*.txt',
+            'ui/static/css/*.css',
+            'ui/static/css/*.css.map',
+            'ui/media/*.svg'
+        ]
+    },
     platforms="linux",
     zip_safe=False,
-    author="Aravinda VK",
-    author_email="mail@aravindavk.in",
+    author="Aravinda Vishwanathapura",
+    author_email="aravinda@kadalu.io",
     description="GlusterFS Dashboard",
-    license="MIT",
+    license="Apache-2.0",
     keywords="glusterfs, gui, dashboard",
-    url="https://github.com/aravindavk/gdash",
+    url="https://github.com/kadalu/gdash",
     long_description="""
     This tool is based on remote execution support provided by
     GlusterFS cli for `volume info` and `volume status` commands
     """,
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 5 - Production/Stable",
         "Topic :: Utilities",
         "Environment :: Console",
         "Environment :: Web Environment",
-        "Framework :: Flask",
-        "License :: OSI Approved :: MIT License",
+        "Framework :: CherryPy",
+        "License :: OSI Approved :: Apache Software License",
         "Operating System :: POSIX :: Linux",
         "Programming Language :: JavaScript",
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 2.6",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 2 :: Only"
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3 :: Only"
     ],
 )

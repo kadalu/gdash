@@ -41,6 +41,9 @@ export function Login({ history }) {
             if (err.response.status === 403) {
                 setError("Invalid username/password");
                 setButtonEnabled(true);
+            } else {
+                setError("Failed to get data from the server(HTTP Status: " + err.response.status + ")");
+                setButtonEnabled(true);
             }
         });
     }

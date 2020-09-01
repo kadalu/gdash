@@ -117,8 +117,10 @@ function volumeDetailUI(volumeId, volumes) {
 
 export function VolumeDetail({ history }) {
     const { volumeId } = useParams();
+    const [loading, setLoading] = useState(true);
     const [volumes, setVolumes] = useState([]);
     const [refreshRequired, setRefreshRequired] = useState(new Date());
+    const [error, setError] = useState("");
     const [elements, setElements] = useState([
         {label: "Volumes", url: '/volumes'}
     ]);
@@ -126,11 +128,15 @@ export function VolumeDetail({ history }) {
     useEffect(() => {
         axios.get("/api/volumes")
              .then((resp) => {
+                 setLoading(false);
                  setVolumes(resp.data);
              })
              .catch(err => {
                  if (err.response.status === 403) {
                      history.push('/login');
+                 } else {
+                     setLoading(false);
+                     setError("Failed to get data from the server(HTTP Status: " + err.response.status + ")");
                  }
              });
     }, [refreshRequired, history]);
@@ -151,6 +157,6 @@ export function VolumeDetail({ history }) {
         }
     }, [volumes, volumeId])
     return (
-        <Content breadcrumb={elements} data={volumeDetailUI(volumeId, volumes)} setRefreshRequired={setRefreshRequired} />
+        <Content breadcrumb={elements} data={volumeDetailUI(volumeId, volumes)} setRefreshRequired={setRefreshRequired} loading={loading} error={error} />
     );
 }
