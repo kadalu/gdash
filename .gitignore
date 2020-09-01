@@ -3,4 +3,6 @@ gdash/dist
 .cache*
 gdash.egg-info/*
 dist/*
-
+build
+__pycache__
+node_modules

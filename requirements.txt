@@ -1,0 +1,2 @@
+CherryPy==18.6.0
+glustercli==0.8.0

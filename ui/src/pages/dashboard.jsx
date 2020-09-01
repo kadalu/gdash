@@ -76,6 +76,6 @@ export function Dashboard({ history }) {
     }, [refreshRequired, history]);
 
     return (
-        <Content breadcrumb={elements} data={dashboardUI(history, volumes, peers)} />
+        <Content breadcrumb={elements} data={dashboardUI(history, volumes, peers)} setRefreshRequired={setRefreshRequired} />
     );
 }
