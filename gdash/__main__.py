@@ -9,7 +9,7 @@ import hashlib
 import cherrypy
 from glustercli.cli import volume, peer
 
-from version import VERSION
+from gdash.version import VERSION
 
 args = None
 users = None
