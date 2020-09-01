@@ -172,6 +172,8 @@ def get_args():
 
 
 def main():
+    global args
+
     args = get_args()
 
     if args.auth_file is not None:
