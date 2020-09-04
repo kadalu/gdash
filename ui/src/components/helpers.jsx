@@ -47,8 +47,8 @@ export function capitalize(string) {
     }).join(' ');
 }
 
-export function utilization(free, total, suffix) {
-    let sizeP = free * 100 / total;
+export function utilization(used, total, suffix) {
+    let sizeP = used * 100 / total;
 
     let cls = "h-1 "
     if (sizeP > 90) {
@@ -65,7 +65,7 @@ export function utilization(free, total, suffix) {
             <div className="bg-gray-300 mb-1 w-3/4">
                 <div style={{width: sizeP.toFixed(2) + "%"}} className={cls}></div>
             </div>
-            <div className="text-gray-700">{humanReadable(free, suffix)} / {humanReadable(total, suffix)}</div>
+            <div className="text-gray-700">{humanReadable(used, suffix)} / {humanReadable(total, suffix)}</div>
         </div>
     );
 }
@@ -79,7 +79,7 @@ export function sizeUtilization(volume) {
         return <>N/A</>
     }
 
-    return utilization(volume.size_free, volume.size_total, 'B');
+    return utilization(volume.size_used, volume.size_total, 'B');
 }
 
 export function inodesUtilization(volume) {
@@ -91,7 +91,7 @@ export function inodesUtilization(volume) {
         return <>N/A</>
     }
 
-    return utilization(volume.inodes_free, volume.inodes_total, '');
+    return utilization(volume.inodes_used, volume.inodes_total, '');
 }
 
 export function humanReadable(input_size, suffix) {
