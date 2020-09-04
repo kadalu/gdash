@@ -29,7 +29,7 @@ setup(
             'ui/static/js/*.txt',
             'ui/static/css/*.css',
             'ui/static/css/*.css.map',
-            'ui/media/*.svg'
+            'ui/static/media/*.svg'
         ]
     },
     platforms="linux",

@@ -172,7 +172,7 @@ def get_args():
 
 
 def main():
-    global args
+    global args, users
 
     args = get_args()
 
@@ -185,7 +185,10 @@ def main():
                     username, password_hash = line.split('=')
                     users[username] = password_hash
 
-    cherrypy.config.update({'server.socket_port': args.port})
+    cherrypy.config.update({
+        'server.socket_host': '0.0.0.0',
+        'server.socket_port': args.port
+    })
     webapp = GdashWeb()
     webapp.api = GdashApis()
     cherrypy.quickstart(webapp, '/', conf)
