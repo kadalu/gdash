@@ -1,2 +1,2 @@
 """Version"""
-VERSION = "master"
+VERSION = "1.0.2"

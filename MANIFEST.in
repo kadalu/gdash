@@ -8,4 +8,4 @@ include gdash/ui/static/js/*.js.map
 include gdash/ui/static/js/*.txt
 include gdash/ui/static/css/*.css
 include gdash/ui/static/css/*.css.map
-include gdash/ui/media/*.svg
+include gdash/ui/static/media/*.svg

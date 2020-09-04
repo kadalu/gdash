@@ -26,7 +26,8 @@ release: gen-version build-ui
 	@echo "Single deployment file is ready: build/${PROGNAME}"
 
 pypi-release: gen-version build-ui
-	@cp -r ui/build gdash/ui
+	@rm -rf gdash/ui
+	@mv ui/build gdash/ui
 	python3 setup.py sdist
 
 .PHONY: help release gen-version build-ui pypi-release
