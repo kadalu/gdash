@@ -7,7 +7,7 @@ import time
 import hashlib
 
 import cherrypy
-from glustercli.cli import volume, peer
+from glustercli.cli import volume, peer, set_gluster_path
 
 from gdash.version import VERSION
 
@@ -184,6 +184,8 @@ def main():
                 if line:
                     username, password_hash = line.split('=')
                     users[username] = password_hash
+
+    set_gluster_path(args.gluster_binary)
 
     cherrypy.config.update({
         'server.socket_host': '0.0.0.0',
