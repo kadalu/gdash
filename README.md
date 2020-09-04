@@ -35,7 +35,7 @@ aravinda=9e56d42f4be084e5e56c9c23c3917ae10611678743b7f7ca0f6d65c4dd413408
 Then run gdash using,
 
 ```
-sudo gdash --auth-file=/etc/glusterfs/gdash.dat
+sudo gdash node1.example.com --auth-file=/etc/glusterfs/gdash.dat
 ```
 
 ## Blog
