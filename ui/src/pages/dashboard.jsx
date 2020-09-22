@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import * as dayjs from 'dayjs';
 
 import { Content } from '../components/content.jsx';
 
@@ -53,7 +54,7 @@ export function Dashboard({ history }) {
     const [loading, setLoading] = useState(true);
     const [peers, setPeers] = useState([]);
     const [volumes, setVolumes] = useState([]);
-    const [refreshRequired, setRefreshRequired] = useState(new Date());
+    const [refreshRequired, setRefreshRequired] = useState(dayjs());
 
     useEffect(() => {
         axios.get("/api/volumes")

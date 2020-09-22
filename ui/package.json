@@ -7,10 +7,9 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.20.0",
-    "moment": "^2.27.0",
+    "dayjs": "^1.8.36",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-moment": "^0.9.7",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3"
   },
