@@ -38,7 +38,7 @@ Then run gdash using,
 sudo gdash node1.example.com --auth-file=/etc/glusterfs/gdash.dat
 ```
 
-Now you can visit http://localhost:8080(or <node-ip>:8080 if accessing gdash externally) from your browser.
+Now you can visit http://localhost:8080 (or <node-ip>:8080 if accessing gdash externally) from your browser.
 
 **Note**: Port can be customized by providing `--port` option(For example, `--port 3000`)
 
