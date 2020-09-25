@@ -38,11 +38,40 @@ Then run gdash using,
 sudo gdash node1.example.com --auth-file=/etc/glusterfs/gdash.dat
 ```
 
+Now you can visit http://localhost:8080(or <node-ip>:8080 if accessing gdash externally) from your browser.
+
+**Note**: Port can be customized by providing `--port` option(For example, `--port 3000`)
+
+Other available options are
+
+```
+$ gdash --help
+usage: gdash [-h] [--version] [--port PORT] [--gluster-binary GLUSTER_BINARY]
+             [--auth-file AUTH_FILE]
+             host
+
+gdash - GlusterFS Dashboard
+
+positional arguments:
+  host                  Hostname of Current node as used in Gluster peer
+                        commands. Gdash replaces the "localhost" references
+                        with this name
+
+optional arguments:
+  -h, --help                       show this help message and exit
+  --version                        show program's version number and exit
+  --port PORT                      Gdash Port(Default is 8080)
+  --gluster-binary GLUSTER_BINARY  Gluster binary path.
+  --auth-file AUTH_FILE            Users Credentials file. One user
+                                   entry per row in the
+                                   format <username>=<password_hash>
+```
+
 ## Blog
 
-* http://aravindavk.in/blog/introducing-gdash
+* http://aravindavk.in/blog/introducing-gdash (Previous version, UI is different now)
 
 
 ## Issues
 
-For feature requests, issues, suggestions [here](https://github.com/aravindavk/gdash/issues)
+For feature requests, issues, suggestions [here](https://github.com/kadalu/gdash/issues)
