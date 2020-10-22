@@ -69,7 +69,8 @@ optional arguments:
 
 ## Blog
 
-* http://aravindavk.in/blog/introducing-gdash (Previous version, UI is different now)
+* [Dec 04, 2014] http://aravindavk.in/blog/introducing-gdash (Previous version, UI is different now)
+* [Oct 19, 2020] https://kadalu.io/blog/gdash-v1.0
 
 
 ## Issues
