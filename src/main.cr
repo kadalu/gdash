@@ -7,11 +7,10 @@ VERSION = {{ env("VERSION") && env("VERSION") != "" ? env("VERSION") : `git desc
 
 class Args
   class_property port = 8080, auth_file = "", gluster_binary_path = "", gluster_host = "", admins = Hash(String, String).new,
-                 templates_env = Crinja.new
+    templates_env = Crinja.new
 end
 
 def parse_args
-  args = Args.new
   OptionParser.parse do |parser|
     parser.banner = "Usage: gluster-dashboard [arguments] HOSTNAME"
     parser.on("-p PORT", "--port=PORT", "Gluster Dashboard Port (Default is 8080)") { |port| Args.port = port.to_i }
