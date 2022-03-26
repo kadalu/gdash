@@ -1,6 +1,8 @@
 require "option_parser"
 
 require "crinja"
+require "kemal"
+require "kemal-session"
 
 # Set VERSION during build time
 VERSION = {{ env("VERSION") && env("VERSION") != "" ? env("VERSION") : `git describe --always --tags --match "[0-9]*" --dirty`.chomp.stringify }}
@@ -49,6 +51,14 @@ def template(name)
   Args.templates_env.get_template(name)
 end
 
+get "/login" do |env|
+  template("login.html.j2").render
+end
+
+get "/" do |env|
+  env.redirect "/login" 
+end
+
 def main
   parse_args
 
@@ -60,6 +70,9 @@ def main
   end
 
   Args.templates_env.loader = Crinja::Loader::FileSystemLoader.new("views/")
+
+  Kemal.config.port = Args.port
+  Kemal.run
 end
 
 main

@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta title="{% block page_title %}{% endblock %}"/>
+        <link href="/stylesheet.css" rel="stylesheet">
+    </head>
+    <body>
+        <main>
+            {% block body %}
+                {# This block is typically overwritten by child templates #}
+            {% endblock %}
+        </main>
+        {% block footer %}
+            {% include "footer.html.j2" %}
+        {% endblock %}
+    </body>
+</html>
