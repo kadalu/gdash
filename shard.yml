@@ -7,4 +7,21 @@ authors:
 description: |
   Lightweight GlusterFS Dashboard.
 
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+
+  kemal-session:
+    github: kemalcr/kemal-session
+
+  glustercli:
+    github: aravindavk/glustercli-crystal
+
+  crinja:
+    github: straight-shoota/crinja
+
+targets:
+  gdash:
+    main: src/main.cr
+
 license: Apache-2.0
