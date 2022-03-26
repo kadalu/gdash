@@ -1,10 +1,13 @@
 require "option_parser"
 
+require "crinja"
+
 # Set VERSION during build time
 VERSION = {{ env("VERSION") && env("VERSION") != "" ? env("VERSION") : `git describe --always --tags --match "[0-9]*" --dirty`.chomp.stringify }}
 
 class Args
-  class_property port = 8080, auth_file = "", gluster_binary_path = "", gluster_host = "", admins = Hash(String, String).new
+  class_property port = 8080, auth_file = "", gluster_binary_path = "", gluster_host = "", admins = Hash(String, String).new,
+                 templates_env = Crinja.new
 end
 
 def parse_args
@@ -43,6 +46,10 @@ def parse_args
   end
 end
 
+def template(name)
+  Args.templates_env.get_template(name)
+end
+
 def main
   parse_args
 
@@ -52,6 +59,8 @@ def main
       Args.admins[username] = password_hash
     end
   end
+
+  Args.templates_env.loader = Crinja::Loader::FileSystemLoader.new("views/")
 end
 
 main
