@@ -58,6 +58,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - name: Data files
+        run: |
+          npm install
+          make gdash-data
       - name: Upload gdash.service to the release
         uses: svenstaro/upload-release-action@v2
         with:
@@ -71,6 +75,14 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: extra/install.sh
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
+      - name: Upload gdash-data to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: bin/gdash-data.tar.gz
           tag: ${{ github.ref }}
           overwrite: true
           file_glob: true
