@@ -1,0 +1,10 @@
+name: gdash
+version: 0.1.0
+
+authors:
+  - Aravinda Vishwanathapura <mail@aravindavk.in>
+
+description: |
+  Lightweight GlusterFS Dashboard.
+
+license: Apache-2.0
