@@ -1,0 +1,27 @@
+name: Run on every PR
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - 'docs/**'
+      - 'extras/**'
+      - '**.md'
+      - '**.adoc'
+
+jobs:
+  # TODO: Add unit test as well here
+  tests:
+    name: Gluster Dashboard Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Crystal
+        run: |
+          curl -fsSL https://crystal-lang.org/install.sh | sudo bash
+      - name: Format Check
+        run: make fmt-check
+      - name: Lint
+        run: make lint
+

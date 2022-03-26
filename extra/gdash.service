@@ -1,0 +1,10 @@
+[Unit]
+Description=Gluster Dashboard
+After=network.target
+
+[Service]
+PIDFile=/var/run/gluster/gdash.pid
+ExecStart=/usr/sbin/gdash $(hostname)
+
+[Install]
+WantedBy=multi-user.target

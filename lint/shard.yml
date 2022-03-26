@@ -1,0 +1,14 @@
+name: lint
+version: 0.1.0
+
+authors:
+  - Aravinda Vishwanathapura <mail@aravindavk.in>
+
+description: |
+  To install Lint tool Ameba
+
+license: Apache-2.0
+
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
