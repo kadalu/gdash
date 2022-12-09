@@ -47,7 +47,7 @@ Other available options are
 ```
 $ gdash --help
 usage: gdash [-h] [--version] [--port PORT] [--gluster-binary GLUSTER_BINARY]
-             [--auth-file AUTH_FILE] [--ssl-cert CERT_FILE] [--ssl-key KEY_FILE] [--ssl-ca CA_FILE]
+             [--auth-file AUTH_FILE] [--ssl-cert CERT_FILE] [--ssl-key KEY_FILE] [--ssl-ca CA_CERT_FILE]
              host
 
 gdash - GlusterFS Dashboard
