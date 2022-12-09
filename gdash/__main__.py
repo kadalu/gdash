@@ -199,24 +199,24 @@ def main():
 
     set_gluster_path(args.gluster_binary)
 
-    cherrypy_config = {
+    cherrypy_cfg = {
         'server.socket_host': '0.0.0.0',
         'server.socket_port': args.port
     }
 
     if args.ssl_cert:
-        cherrypy_config['server.ssl_certificate'] = args.ssl_cert
+        cherrypy_cfg['server.ssl_certificate'] = args.ssl_cert
 
     if args.ssl_key:
-        cherrypy_config['server.ssl_private_key'] = args.ssl_key
+        cherrypy_cfg['server.ssl_private_key'] = args.ssl_key
 
     if args.ssl_ca:
-        cherrypy_config['server.ssl_certificate_chain'] = args.ssl_ca
+        cherrypy_cfg['server.ssl_certificate_chain'] = args.ssl_ca
 
     if args.ssl_cert and args.ssl_key:
-        cherrypy_config['server.ssl_module'] = 'builtin'
+        cherrypy_cfg['server.ssl_module'] = 'builtin'
 
-    cherrypy.config.update(cherrypy_config)
+    cherrypy.config.update(cherrypy_cfg)
     webapp = GdashWeb()
     webapp.api = GdashApis()
     cherrypy.quickstart(webapp, '/', conf)
