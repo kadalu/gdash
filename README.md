@@ -47,7 +47,7 @@ Other available options are
 ```
 $ gdash --help
 usage: gdash [-h] [--version] [--port PORT] [--gluster-binary GLUSTER_BINARY]
-             [--auth-file AUTH_FILE]
+             [--auth-file AUTH_FILE] [--ssl-cert CERT_FILE] [--ssl-key KEY_FILE] [--ssl-ca CA_FILE]
              host
 
 gdash - GlusterFS Dashboard
@@ -65,6 +65,9 @@ optional arguments:
   --auth-file AUTH_FILE            Users Credentials file. One user
                                    entry per row in the
                                    format <username>=<password_hash>
+  --ssl-cert CERT_FILE             Path to SSL Certificate file
+  --ssl-key KEY_FILE               Path to SSL Key file
+  --ssl-ca CA_FILE                 Path to SSL CA Certificate file
 ```
 
 ## Blog
