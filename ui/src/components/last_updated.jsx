@@ -37,9 +37,14 @@ export function LastUpdated({ setRefreshRequired }) {
 
     return (
         <p className="text-indigo-900 px-4 py-1 text-right text-sm mt-5">
-            Last updated {lstUpdatedDisp}
+            {autoRefresh ? 'Last updated (auto refresh)' : 'Last updated'} {lstUpdatedDisp}
             <button className="bg-indigo-600 text-indigo-100 rounded-lg px-2 py-1 hover:bg-indigo-900 mx-2" onClick={handleClick}>reload</button>
-            <button className="bg-indigo-600 text-indigo-100 rounded-lg px-2 py-1 hover:bg-indigo-900" onClick={() => toggleAutoRefresh()}>auto refresh</button>
+            <button 
+                className={`bg-indigo-600 text-indigo-100 rounded-lg px-2 py-1 hover:bg-indigo-900 ${autoRefresh ? 'bg-indigo-900' : ''}`}
+                onClick={() => toggleAutoRefresh()}
+            >
+                auto refresh
+            </button>
         </p>
     );
 }
