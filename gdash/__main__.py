@@ -1,13 +1,13 @@
 """
 gdash - GlusterFS Dashboard
 """
-from argparse import ArgumentParser
+import hashlib
 import os
 import time
-import hashlib
+from argparse import ArgumentParser
 
 import cherrypy
-from glustercli.cli import volume, peer, set_gluster_path
+from glustercli.cli import peer, set_gluster_path, volume
 
 from gdash.version import VERSION
 
@@ -15,23 +15,21 @@ args = None
 users = None
 
 conf = {
-    '/api': {
-        'tools.response_headers.on': True,
-        'tools.response_headers.headers': [
-            ('Content-Type', 'application/json')
-        ],
-        'tools.caching.on': True,
-        'tools.caching.delay': 5
+    "/api": {
+        "tools.response_headers.on": True,
+        "tools.response_headers.headers": [("Content-Type", "application/json")],
+        "tools.caching.on": True,
+        "tools.caching.delay": 5,
     },
-    '/': {
-        'tools.staticdir.on': True,
-        'tools.sessions.on': True,
-        'tools.staticdir.dir': os.path.join(
-            os.path.dirname(os.path.abspath(__file__)),
-            'ui'
-        )
-    }
+    "/": {
+        "tools.staticdir.on": True,
+        "tools.sessions.on": True,
+        "tools.staticdir.dir": os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "ui"
+        ),
+    },
 }
+
 
 def is_valid_admin_login(username, password):
     if users is None:
@@ -51,29 +49,27 @@ def is_admin():
     if users is None:
         return True
 
-    return 'admin' == cherrypy.session.get('role', '')
+    return "admin" == cherrypy.session.get("role", "")
 
 
 def forbidden():
     cherrypy.response.status = 403
-    return {
-        "error": "Forbidden"
-    }
+    return {"error": "Forbidden"}
 
 
 @cherrypy.tools.json_in()
 @cherrypy.tools.json_out()
-class GdashApis(object):
+class GdashApis:
     @cherrypy.expose
     def login(self):
         if is_admin():
             return {}
 
-        if cherrypy.request.method == 'POST':
+        if cherrypy.request.method == "POST":
             data = cherrypy.request.json
-            if is_valid_admin_login(data['username'], data['password']):
-                cherrypy.session['role'] = 'admin'
-                cherrypy.session['username'] = data['username']
+            if is_valid_admin_login(data["username"], data["password"]):
+                cherrypy.session["role"] = "admin"
+                cherrypy.session["username"] = data["username"]
                 return {}
 
         return forbidden()
@@ -83,11 +79,11 @@ class GdashApis(object):
         if not is_admin():
             return {}
 
-        if cherrypy.session.get('role', None) is not None:
-            del cherrypy.session['role']
+        if cherrypy.session.get("role", None) is not None:
+            del cherrypy.session["role"]
 
-        if cherrypy.session.get('username', None) is not None:
-            del cherrypy.session['username']
+        if cherrypy.session.get("username", None) is not None:
+            del cherrypy.session["username"]
 
         return {}
 
@@ -105,7 +101,7 @@ class GdashApis(object):
 
         peers = peer.pool()
         for entry in peers:
-            if entry["hostname"] == 'localhost':
+            if entry["hostname"] == "localhost":
                 entry["hostname"] = args.host
 
         return peers
@@ -113,7 +109,7 @@ class GdashApis(object):
 
 class GdashWeb:
     def default_render(self):
-        filepath = os.path.dirname(os.path.abspath(__file__)) + '/ui/index.html'
+        filepath = os.path.dirname(os.path.abspath(__file__)) + "/ui/index.html"
         with open(filepath) as index_file:
             return index_file.read()
 
@@ -148,36 +144,32 @@ class GdashWeb:
 
 def get_args():
     parser = ArgumentParser(description=__doc__)
-    parser.add_argument('--version', action='version', version='%(prog)s ' + VERSION)
+    parser.add_argument("--version", action="version", version="%(prog)s " + VERSION)
+    parser.add_argument("--port", type=int, default=8080, help="Gdash Port")
     parser.add_argument(
-        '--port',
-        type=int,
-        default=8080,
-        help='Gdash Port'
+        "host",
+        help=(
+            "Hostname of Current node as used in Gluster "
+            'peer commands. Gdash replaces the "localhost" '
+            "references with this name"
+        ),
+    )
+    parser.add_argument("--gluster-binary", default="gluster")
+    parser.add_argument(
+        "--auth-file",
+        help=(
+            "Users Credentials file. One user entry per row "
+            "in the format <username>=<password_hash>"
+        ),
     )
     parser.add_argument(
-        'host',
-        help=('Hostname of Current node as used in Gluster '
-              'peer commands. Gdash replaces the "localhost" '
-              'references with this name')
+        "--ssl-cert", default=None, help=("Path to SSL Certificate used by Gdash")
     )
-    parser.add_argument('--gluster-binary', default='gluster')
     parser.add_argument(
-        '--auth-file',
-        help=('Users Credentials file. One user entry per row '
-              'in the format <username>=<password_hash>')
+        "--ssl-key", default=None, help=("Path to SSL Key used by Gdash")
     )
-    parser.add_argument('--ssl-cert',
-        default=None,
-        help=('Path to SSL Certificate used by Gdash')
-    )
-    parser.add_argument('--ssl-key',
-        default=None,
-        help=('Path to SSL Key used by Gdash')
-    )
-    parser.add_argument('--ssl-ca',
-        default=None,
-        help=('Path to SSL CA Certificate used by Gdash')
+    parser.add_argument(
+        "--ssl-ca", default=None, help=("Path to SSL CA Certificate used by Gdash")
     )
 
     return parser.parse_args()
@@ -194,33 +186,30 @@ def main():
             for line in usersf:
                 line = line.strip()
                 if line:
-                    username, password_hash = line.split('=')
+                    username, password_hash = line.split("=")
                     users[username] = password_hash
 
     set_gluster_path(args.gluster_binary)
 
-    cherrypy_cfg = {
-        'server.socket_host': '0.0.0.0',
-        'server.socket_port': args.port
-    }
+    cherrypy_cfg = {"server.socket_host": "0.0.0.0", "server.socket_port": args.port}
 
     if args.ssl_cert:
-        cherrypy_cfg['server.ssl_certificate'] = args.ssl_cert
+        cherrypy_cfg["server.ssl_certificate"] = args.ssl_cert
 
     if args.ssl_key:
-        cherrypy_cfg['server.ssl_private_key'] = args.ssl_key
+        cherrypy_cfg["server.ssl_private_key"] = args.ssl_key
 
     if args.ssl_ca:
-        cherrypy_cfg['server.ssl_certificate_chain'] = args.ssl_ca
+        cherrypy_cfg["server.ssl_certificate_chain"] = args.ssl_ca
 
     if args.ssl_cert and args.ssl_key:
-        cherrypy_cfg['server.ssl_module'] = 'builtin'
+        cherrypy_cfg["server.ssl_module"] = "builtin"
 
     cherrypy.config.update(cherrypy_cfg)
     webapp = GdashWeb()
     webapp.api = GdashApis()
-    cherrypy.quickstart(webapp, '/', conf)
+    cherrypy.quickstart(webapp, "/", conf)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
