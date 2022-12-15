@@ -3,7 +3,6 @@ gdash - GlusterFS Dashboard
 """
 import hashlib
 import os
-import time
 from argparse import ArgumentParser
 
 import cherrypy
@@ -11,8 +10,8 @@ from glustercli.cli import peer, set_gluster_path, volume
 
 from gdash.version import VERSION
 
-args = None
-users = None
+ARGS = None
+USERS = None
 
 conf = {
     "/api": {
@@ -32,10 +31,10 @@ conf = {
 
 
 def is_valid_admin_login(username, password):
-    if users is None:
+    if USERS is None:
         return True
 
-    pwd_hash = users.get(username, None)
+    pwd_hash = USERS.get(username, None)
     if pwd_hash is None:
         return False
 
@@ -46,7 +45,7 @@ def is_valid_admin_login(username, password):
 
 
 def is_admin():
-    if users is None:
+    if USERS is None:
         return True
 
     return "admin" == cherrypy.session.get("role", "")
@@ -102,15 +101,18 @@ class GdashApis:
         peers = peer.pool()
         for entry in peers:
             if entry["hostname"] == "localhost":
-                entry["hostname"] = args.host
+                entry["hostname"] = ARGS.host
 
         return peers
 
 
 class GdashWeb:
+    def __init__(self):
+        self.api = None
+
     def default_render(self):
         filepath = os.path.dirname(os.path.abspath(__file__)) + "/ui/index.html"
-        with open(filepath) as index_file:
+        with open(filepath, encoding="utf-8") as index_file:
             return index_file.read()
 
     @cherrypy.expose
@@ -176,33 +178,33 @@ def get_args():
 
 
 def main():
-    global args, users
+    global ARGS, USERS
 
-    args = get_args()
+    ARGS = get_args()
 
-    if args.auth_file is not None:
-        users = {}
-        with open(args.auth_file) as usersf:
+    if ARGS.auth_file is not None:
+        USERS = {}
+        with open(ARGS.auth_file, encoding="utf-8") as usersf:
             for line in usersf:
                 line = line.strip()
                 if line:
                     username, password_hash = line.split("=")
-                    users[username] = password_hash
+                    USERS[username] = password_hash
 
-    set_gluster_path(args.gluster_binary)
+    set_gluster_path(ARGS.gluster_binary)
 
-    cherrypy_cfg = {"server.socket_host": "0.0.0.0", "server.socket_port": args.port}
+    cherrypy_cfg = {"server.socket_host": "0.0.0.0", "server.socket_port": ARGS.port}
 
-    if args.ssl_cert:
-        cherrypy_cfg["server.ssl_certificate"] = args.ssl_cert
+    if ARGS.ssl_cert:
+        cherrypy_cfg["server.ssl_certificate"] = ARGS.ssl_cert
 
-    if args.ssl_key:
-        cherrypy_cfg["server.ssl_private_key"] = args.ssl_key
+    if ARGS.ssl_key:
+        cherrypy_cfg["server.ssl_private_key"] = ARGS.ssl_key
 
-    if args.ssl_ca:
-        cherrypy_cfg["server.ssl_certificate_chain"] = args.ssl_ca
+    if ARGS.ssl_ca:
+        cherrypy_cfg["server.ssl_certificate_chain"] = ARGS.ssl_ca
 
-    if args.ssl_cert and args.ssl_key:
+    if ARGS.ssl_cert and ARGS.ssl_key:
         cherrypy_cfg["server.ssl_module"] = "builtin"
 
     cherrypy.config.update(cherrypy_cfg)
