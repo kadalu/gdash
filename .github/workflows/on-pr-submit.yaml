@@ -1,0 +1,26 @@
+name: Run on every PR
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - 'docs/**'
+      - 'extras/**'
+      - '**.md'
+      - '**.adoc'
+
+  # Allow to run this workflow manually from the Actions tab
+  workflow_dispatch:
+jobs:
+  devel-tag-push:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 18.x
+    - name: Build
+      run: |
+          cd ui && npm install && npm run build

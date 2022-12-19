@@ -1,4 +1,4 @@
-VERSION ?= "master"
+VERSION ?= "main"
 PYTHON ?= python3
 PROGNAME = gdash
 
@@ -28,6 +28,6 @@ release: gen-version build-ui
 pypi-release: gen-version build-ui
 	@rm -rf gdash/ui
 	@mv ui/build gdash/ui
-	python3 setup.py sdist
+	python3 setup.py sdist bdist_wheel
 
 .PHONY: help release gen-version build-ui pypi-release
