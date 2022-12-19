@@ -1,8 +1,9 @@
-# -*- coding: utf-8 -*-
 from setuptools import setup
+
 
 def get_version():
     from gdash.version import VERSION
+
     return VERSION
 
 
@@ -11,25 +12,25 @@ setup(
     version=get_version(),
     packages=["gdash"],
     include_package_data=True,
-    install_requires=['cherrypy', 'glustercli'],
+    install_requires=["cherrypy", "glustercli"],
     entry_points={
         "console_scripts": [
             "gdash = gdash.__main__:main",
         ]
     },
     package_data={
-        'gdash': [
-            'ui/*.json',
-            'ui/*.html',
-            'ui/*.png',
-            'ui/*.js',
-            'ui/*.txt',
-            'ui/static/js/*.js',
-            'ui/static/js/*.js.map',
-            'ui/static/js/*.txt',
-            'ui/static/css/*.css',
-            'ui/static/css/*.css.map',
-            'ui/static/media/*.svg'
+        "gdash": [
+            "ui/*.json",
+            "ui/*.html",
+            "ui/*.png",
+            "ui/*.js",
+            "ui/*.txt",
+            "ui/static/js/*.js",
+            "ui/static/js/*.js.map",
+            "ui/static/js/*.txt",
+            "ui/static/css/*.css",
+            "ui/static/css/*.css.map",
+            "ui/static/media/*.svg",
         ]
     },
     platforms="linux",
@@ -54,6 +55,6 @@ setup(
         "Operating System :: POSIX :: Linux",
         "Programming Language :: JavaScript",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3 :: Only"
+        "Programming Language :: Python :: 3 :: Only",
     ],
 )
