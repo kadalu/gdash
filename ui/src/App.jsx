@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     BrowserRouter as Router,
-    Switch,
+    Routes,
     Route
 } from "react-router-dom";
 
@@ -16,24 +16,24 @@ import { VolumeDetail } from './pages/volumeDetail.jsx';
 function App() {
     return (
         <Router>
-            <Switch>
+            <Routes>
                 <Route path="/login"
-                       component={Login}/>
+                       element={<Login/>}/>
                 <Route path="/dashboard"
-                       component={Dashboard}/>
+                       element={<Dashboard/>}/>
                 <Route path="/volumes/:volumeId"
-                       component={VolumeDetail}/>
+                       element={<VolumeDetail/>}/>
                 <Route path="/volumes"
-                       component={Volumes}/>
+                       element={<Volumes/>}/>
                 <Route path="/peers"
-                       component={Peers}/>
+                       element={<Peers/>}/>
                 <Route path="/bricks"
-                       component={Bricks}/>
+                       element={<Bricks/>}/>
                 <Route path="/logout"
-                       component={Logout}/>
+                       element={<Logout/>}/>
                 <Route path="/"
-                       component={Dashboard}/>
-            </Switch>
+                       element={<Dashboard/>}/>
+            </Routes>
         </Router>
     );
 }
