@@ -25,7 +25,7 @@ function bricksUI(volumes) {
                         return volume.subvols.map((subvol, sdx) => {
                             return subvol.bricks.map((brick, bdx) => {
                                 return (
-                                    <tr key={vdx + '-' + sdx + '-' + bdx} className="border-b border-indigo-100 hover:bg-gray-100 cursor-pointer">
+                                    <tr key={vdx + '-' + sdx + '-' + bdx} className="border-b border-indigo-100 hover:bg-gray-100">
                                         <td className="px-5 py-2" style={{minWidth: "250px"}}>
                                             {volume.name}<div className="text-sm text-gray-700">{volume.uuid}</div>
                                         </td>

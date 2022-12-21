@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import axios from 'axios';
 import * as dayjs from 'dayjs';
 
@@ -6,11 +7,6 @@ import { Content } from '../components/content.jsx'
 import { volumeStatus, capitalize, sizeUtilization, inodesUtilization } from '../components/helpers';
 
 function volumesUI(history, volumes) {
-
-    function handleClick(volume_id) {
-        history.push('/volumes/' + volume_id)
-    }
-
     return (
         <table className="border border-indigo-100 rounded-lg shadow-lg" style={{width: "90%"}}>
             <thead>
@@ -26,7 +22,7 @@ function volumesUI(history, volumes) {
                 {
                     volumes.map((volume, idx) => {
                         return (
-                            <tr key={idx} className="border-b border-indigo-100 hover:bg-gray-100 cursor-pointer" onClick={() => handleClick(volume.uuid)}>
+                            <tr key={idx} className="border-b border-indigo-100 hover:bg-gray-100 cursor-pointer" onClick={() => window.location = '/volumes/' + volume.uuid}>
                                 <td className="px-5 py-2" style={{minWidth: "250px"}}>
                                     {volume.name}<div className="text-sm text-gray-700">{volume.uuid}</div>
                                 </td>
@@ -37,12 +33,12 @@ function volumesUI(history, volumes) {
                                 <td className="px-5 py-2">{sizeUtilization(volume)}</td>
                                 <td className="px-5 py-2">{inodesUtilization(volume)}</td>
                             </tr>
-                        );
+                    );
                     })
                 }
             </tbody>
         </table>
-    )
+)
 }
 
 export function Volumes({ history }) {
