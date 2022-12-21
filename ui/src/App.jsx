@@ -21,10 +21,12 @@ function App() {
                        element={<Login/>}/>
                 <Route path="/dashboard"
                        element={<Dashboard/>}/>
-                <Route path="/volumes/:volumeId"
-                       element={<VolumeDetail/>}/>
-                <Route path="/volumes"
-                       element={<Volumes/>}/>
+                <Route path="/volumes">
+                    <Route path=""
+                           element={<Volumes/>}/>
+                    <Route path=":volumeId"
+                           element={<VolumeDetail/>}/>
+                </Route>
                 <Route path="/peers"
                        element={<Peers/>}/>
                 <Route path="/bricks"
