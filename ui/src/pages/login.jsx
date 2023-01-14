@@ -18,7 +18,7 @@ export function Login({ history }) {
     useEffect(() => {
         axios.get("/api/login")
              .then((resp) => {
-                 history.push('/dashboard');
+                 window.location = '/dashboard';
              });
     }, [history]);
 
@@ -36,7 +36,7 @@ export function Login({ history }) {
             username: username,
             password: password
         }).then(res => {
-            history.push('/dashboard');
+            window.location = '/dashboard';
         }).catch(err => {
             if (err.response.status === 403) {
                 setError("Invalid username/password");

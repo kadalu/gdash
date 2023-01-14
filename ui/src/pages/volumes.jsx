@@ -59,7 +59,7 @@ export function Volumes({ history }) {
              })
              .catch(err => {
                  if (err.response.status === 403) {
-                     history.push('/login');
+                     window.location = '/login';
                  } else {
                      setLoading(false);
                      setError("Failed to get data from the server(HTTP Status: " + err.response.status + ")");

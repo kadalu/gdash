@@ -10,7 +10,7 @@ export function Logout({ history }) {
              .then((resp) => {
                  setMessage("Logged out Successfully...");
                  setInterval(() => {
-                     history.push('/login');
+                     window.location = '/login';
                  }, 2000);
              }).catch(err => {
                  setError("Failed to get data from the server(HTTP Status: " + err.response.status + ")");
