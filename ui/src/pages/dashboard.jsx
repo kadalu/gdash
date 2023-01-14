@@ -38,11 +38,11 @@ function dashboardUI(history, volumes, peers) {
     }
     return (
         <div className="">
-            <Box label="Peers" value={upPeers + ' / ' + peers.length} onClick={() => history.push('/peers')}/>
-            <Box label="Volumes" value={upVolumes + ' / ' + volumes.length} onClick={() => history.push('/volumes')}/>
-            <Box label="Bricks" value={upBricks + ' / ' + numBricks} onClick={() => history.push('/bricks')}/>
+            <Box label="Peers" value={upPeers + ' / ' + peers.length} onClick={() => window.location = '/peers'}/>
+            <Box label="Volumes" value={upVolumes + ' / ' + volumes.length} onClick={() => window.location = '/volumes'}/>
+            <Box label="Bricks" value={upBricks + ' / ' + numBricks} onClick={() => window.location = '/bricks'}/>
         </div>
-    );
+);
 }
 
 export function Dashboard({ history }) {
@@ -64,7 +64,7 @@ export function Dashboard({ history }) {
              })
              .catch(err => {
                  if (err.response.status === 403) {
-                     history.push('/login');
+                     window.location = '/login';
                  } else {
                      setLoading(false);
                      setError("Failed to get data from the server(HTTP Status: " + err.response.status + ")");
@@ -77,7 +77,7 @@ export function Dashboard({ history }) {
              })
              .catch(err => {
                  if (err.response.status === 403) {
-                     history.push('/login');
+                     window.location = '/login';
                  }
              });
     }, [refreshRequired, history]);
