@@ -173,6 +173,9 @@ def get_args():
     parser.add_argument(
         "--ssl-ca", default=None, help=("Path to SSL CA Certificate used by Gdash")
     )
+    parser.add_argument(
+        "--ssl-ciphers", default=None, help=("List of SSL Ciphers to allow")
+    )
 
     return parser.parse_args()
 
@@ -204,19 +207,11 @@ def main():
     if ARGS.ssl_ca:
         cherrypy_cfg["server.ssl_certificate_chain"] = ARGS.ssl_ca
 
+    if ARGS.ssl_ciphers:
+        cherrypy_cfg["server.ssl_ciphers"] = ARGS.ssl_ciphers
+
     if ARGS.ssl_cert and ARGS.ssl_key:
         cherrypy_cfg["server.ssl_module"] = "builtin"
-        cherrypy_cfg["server.ssl_ciphers"] = (
-            "ECDHE-ECDSA-AES128-GCM-SHA256:"
-            "ECDHE-RSA-AES128-GCM-SHA256:"
-            "ECDHE-ECDSA-AES256-GCM-SHA384:"
-            "ECDHE-RSA-AES256-GCM-SHA384:"
-            "ECDHE-ECDSA-CHACHA20-POLY1305:"
-            "ECDHE-RSA-CHACHA20-POLY1305:"
-            "DHE-RSA-AES128-GCM-SHA256:"
-            "DHE-RSA-AES256-GCM-SHA384:"
-            "DHE-RSA-CHACHA20-POLY1305"
-        )
 
     cherrypy.config.update(cherrypy_cfg)
     webapp = GdashWeb()
