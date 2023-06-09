@@ -173,6 +173,9 @@ def get_args():
     parser.add_argument(
         "--ssl-ca", default=None, help=("Path to SSL CA Certificate used by Gdash")
     )
+    parser.add_argument(
+        "--ssl-ciphers", default=None, help=("List of SSL Ciphers to allow")
+    )
 
     return parser.parse_args()
 
@@ -203,6 +206,9 @@ def main():
 
     if ARGS.ssl_ca:
         cherrypy_cfg["server.ssl_certificate_chain"] = ARGS.ssl_ca
+
+    if ARGS.ssl_ciphers:
+        cherrypy_cfg["server.ssl_ciphers"] = ARGS.ssl_ciphers
 
     if ARGS.ssl_cert and ARGS.ssl_key:
         cherrypy_cfg["server.ssl_module"] = "builtin"
