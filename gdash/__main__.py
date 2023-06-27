@@ -25,6 +25,7 @@ conf = {
         "tools.sessions.on": True,
         "tools.sessions.secure" = True,
         "tools.sessions.httponly" = True,
+        "tools.secureheaders.on" = True,
         "tools.staticdir.dir": os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "ui"
         ),
