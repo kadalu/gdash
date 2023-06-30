@@ -33,9 +33,9 @@ conf = {
 
 def secureheaders():
     headers = cherrypy.response.headers
-    headers['X-Frame-Options'] = 'DENY'
-    headers['X-XSS-Protection'] = '1; mode=block'
-    headers['Content-Security-Policy'] = "default-src='self'"
+    headers["X-Frame-Options"] = "DENY"
+    headers["X-XSS-Protection"] = "1; mode=block"
+    headers["Content-Security-Policy"] = "default-src='self'"
 
 
 def is_valid_admin_login(username, password):
@@ -210,7 +210,7 @@ def main():
         cherrypy_cfg["server.ssl_module"] = "builtin"
 
     cherrypy.config.update(cherrypy_cfg)
-    cherrypy.tools.secureheaders = cherrypy.Tool('before_finalize', secureheaders, priority=60)
+    cherrypy.tools.secureheaders = cherrypy.Tool("before_finalize", secureheaders, priority=60)
     webapp = GdashWeb()
     webapp.api = GdashApis()
     cherrypy.quickstart(webapp, "/", conf)
