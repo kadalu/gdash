@@ -47,7 +47,7 @@ Other available options are
 ```
 $ gdash --help
 usage: gdash [-h] [--version] [--port PORT] [--gluster-binary GLUSTER_BINARY]
-             [--auth-file AUTH_FILE] [--ssl-cert CERT_FILE] [--ssl-key KEY_FILE] [--ssl-ca CA_CERT_FILE]
+             [--auth-file AUTH_FILE] [--ssl-cert CERT_FILE] [--ssl-key KEY_FILE] [--ssl-ca CA_CERT_FILE] [--ssl-ciphers LIST_OF_CIPHERS]
              host
 
 gdash - GlusterFS Dashboard
@@ -68,6 +68,7 @@ optional arguments:
   --ssl-cert CERT_FILE             Path to SSL Certificate file
   --ssl-key KEY_FILE               Path to SSL Key file
   --ssl-ca CA_FILE                 Path to SSL CA Certificate file
+  --ssl-ciphers                    List of SSL Ciphers to allow
 ```
 
 ## Blog

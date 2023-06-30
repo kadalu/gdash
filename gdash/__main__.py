@@ -23,14 +23,19 @@ conf = {
     "/": {
         "tools.staticdir.on": True,
         "tools.sessions.on": True,
-        "tools.sessions.secure" = True,
-        "tools.sessions.httponly" = True,
-        "tools.secureheaders.on" = True,
-        "tools.staticdir.dir": os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "ui"
-        ),
+        "tools.sessions.secure": True,
+        "tools.sessions.httponly": True,
+        "tools.secureheaders.on": True,
+        "tools.staticdir.dir": os.path.join(os.path.dirname(os.path.abspath(__file__)), "ui"),
     },
 }
+
+
+def secureheaders():
+    headers = cherrypy.response.headers
+    headers['X-Frame-Options'] = 'DENY'
+    headers['X-XSS-Protection'] = '1; mode=block'
+    headers['Content-Security-Policy'] = "default-src='self'"
 
 
 def is_valid_admin_login(username, password):
@@ -162,24 +167,12 @@ def get_args():
     parser.add_argument("--gluster-binary", default="gluster")
     parser.add_argument(
         "--auth-file",
-        help=(
-            "Users Credentials file. One user entry per row "
-            "in the format <username>=<password_hash>"
-        ),
+        help=("Users Credentials file. One user entry per row " "in the format <username>=<password_hash>"),
     )
-    parser.add_argument(
-        "--ssl-cert", default=None, help=("Path to SSL Certificate used by Gdash")
-    )
-    parser.add_argument(
-        "--ssl-key", default=None, help=("Path to SSL Key used by Gdash")
-    )
-    parser.add_argument(
-        "--ssl-ca", default=None, help=("Path to SSL CA Certificate used by Gdash")
-    )
-    parser.add_argument(
-        "--ssl-ciphers", default=None, help=("List of SSL Ciphers to allow")
-    )
-
+    parser.add_argument("--ssl-cert", default=None, help=("Path to SSL Certificate used by Gdash"))
+    parser.add_argument("--ssl-key", default=None, help=("Path to SSL Key used by Gdash"))
+    parser.add_argument("--ssl-ca", default=None, help=("Path to SSL CA Certificate used by Gdash"))
+    parser.add_argument("--ssl-ciphers", default=None, help=("List of SSL Ciphers to allow"))
     return parser.parse_args()
 
 
@@ -217,6 +210,7 @@ def main():
         cherrypy_cfg["server.ssl_module"] = "builtin"
 
     cherrypy.config.update(cherrypy_cfg)
+    cherrypy.tools.secureheaders = cherrypy.Tool('before_finalize', secureheaders, priority=60)
     webapp = GdashWeb()
     webapp.api = GdashApis()
     cherrypy.quickstart(webapp, "/", conf)
