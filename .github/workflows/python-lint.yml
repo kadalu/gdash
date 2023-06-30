@@ -21,8 +21,10 @@ jobs:
       - name: Run ruff check
         uses: chartboost/ruff-action@v1
         with:
+          src: "./gdash"
           args: "--verbose"
       - name: Run black check
         uses: psf/black@stable
         with:
           options: "--check --diff --verbose"
+          src: "./gdash"
