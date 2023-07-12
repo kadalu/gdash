@@ -1,0 +1,30 @@
+name: Python Lint
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - 'docs/**'
+      - 'extras/**'
+      - '**.md'
+      - '**.adoc'
+
+jobs:
+  lint-python-code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+      - name: Run ruff check
+        uses: chartboost/ruff-action@v1
+        with:
+          src: "./gdash"
+          args: "--verbose"
+      - name: Run black check
+        uses: psf/black@stable
+        with:
+          options: "--check --diff --verbose -l 120"
+          src: "./gdash"
